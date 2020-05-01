@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\Director;
 use Illuminate\Http\Request;
 
-class DirectorController
+class DirectorController extends Controller
 {
     public function index()
     {

@@ -103,7 +103,7 @@ class FilmController extends Controller
 
     public function destroy($id)
     {
-        $film = Film::find($id)->first();
+        $film = Film::where('id', $id)->first();
         $film->genres()->detach();
         $film->actors()->detach();
         $film->directors()->detach();

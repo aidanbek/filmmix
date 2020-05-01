@@ -33,21 +33,24 @@ class GenreController extends Controller
 
     public function show($id)
     {
-        //
+        $genre = Genre::with('films', 'films.actors', 'films.genres', 'films.directors')
+            ->where('id', $id)
+            ->first();
+        return view('genre.show', compact('genre'));
     }
 
     public function edit($id)
     {
-        //
+
     }
 
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     public function destroy($id)
     {
-        //
+
     }
 }

@@ -1,13 +1,11 @@
 <?php
 
-
 namespace App\Http\Controllers;
-
 
 use App\Actor;
 use Illuminate\Http\Request;
 
-class ActorController
+class ActorController extends Controller
 {
     public function index()
     {
@@ -35,21 +33,26 @@ class ActorController
 
     public function show($id)
     {
-        //
+        $actor = Actor::with('films', 'films.actors', 'films.genres', 'films.directors')
+            ->where('id', $id)
+            ->first();
+        return view('actor.show', compact('actor'));
     }
 
     public function edit($id)
     {
-        //
+
     }
 
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     public function destroy($id)
     {
-        //
+        $actor = Actor::where('id', $id)->first();
+        $actor->delete();
+        return redirect(route('actors.index'));
     }
 }
