@@ -3,11 +3,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
                     <th>Название</th>
                     <th>Год</th>
+                    <th>Жанр</th>
                     <th>Режиссер</th>
                     <th>Актерский состав</th>
                 </tr>
@@ -18,13 +19,18 @@
                         <td><a href="{{route('films.show', $film->id)}}">{{$film->title}}</a></td>
                         <td>{{$film->prod_year}}</td>
                         <td>
+                            @foreach($film->genres as $genre)
+                                @include('components.genre_link', compact('genre'))
+                            @endforeach
+                        </td>
+                        <td>
                             @foreach($film->directors as $director)
-                                <a class="text-decoration-none" href="{{route('directors.show', $director->id)}}">{{$director->title}}</a>
+                                @include('components.director_link', compact('director'))
                             @endforeach
                         </td>
                         <td>
                             @foreach($film->actors as $actor)
-                                <a class="text-decoration-none" href="{{route('actors.show', $actor->id)}}">{{$actor->title}}</a>
+                                @include('components.actor_link', compact('actor'))
                             @endforeach
                         </td>
                     </tr>

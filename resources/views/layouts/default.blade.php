@@ -21,11 +21,6 @@
 </div>
 
 <script src="{{asset('js/app.js')}}"></script>
-<script>
-    $(document).ready(function(){
-        $('.selectpicker').selectpicker();
-    });
-</script>
 </body>
 
 

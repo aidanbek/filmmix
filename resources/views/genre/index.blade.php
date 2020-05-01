@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
                     <th>Название</th>
@@ -13,7 +13,7 @@
                 <tbody>
                 @foreach($genres as $genre)
                     <tr>
-                        <td>{{$genre->title}}</td>
+                        <td> @include('components.genre_link', compact('genre'))</td>
                         <td>{{$genre->films->count()}}</td>
                     </tr>
                 @endforeach
