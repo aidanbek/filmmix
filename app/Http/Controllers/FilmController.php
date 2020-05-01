@@ -49,8 +49,8 @@ class FilmController extends Controller
 
     public function show($id)
     {
-        $film = Film::find($id)->first();
-        dd($film);
+        $film = Film::with('actors', 'directors', 'genres')->where('id', $id)->first();
+        return view('film.show', compact('film'));
     }
 
     public function edit($id)
