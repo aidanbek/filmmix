@@ -76,6 +76,10 @@ class FilmController extends Controller
         $film->prod_year = $request->prod_year;
         $film->save();
 
+        if (is_null($request->actors)) $request->actors = [];
+        if (is_null($request->directors)) $request->directors = [];
+        if (is_null($request->genres)) $request->genres = [];
+
         $existedActors = $film->actors->pluck('id')->toArray();
         $actorsToAdd = array_diff($request->actors, $existedActors);
         $actorsToRemove = array_diff($existedActors, $request->actors);

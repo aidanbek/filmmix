@@ -33,10 +33,19 @@
     </div>
     <div class="row my-3">
         <div class="col-sm-12">
-            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#edit_film">
+            <button type="button"
+                    class="btn btn-outline-primary btn-sm"
+                    data-toggle="modal"
+                    data-target="#edit_film">
                 Редактировать
             </button>
-            <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#delete_film">Удалить</button>
+            @if($film->actors->count() === 0 && $film->directors->count() === 0)
+                <button type="button"
+                        class="btn btn-outline-danger btn-sm"
+                        data-toggle="modal"
+                        data-target="#delete_film">Удалить
+                </button>
+            @endif
         </div>
     </div>
 
@@ -130,7 +139,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="delete_film" tabindex="-1" role="dialog" aria-labelledby="delete_film_title" aria-hidden="true">
+    <div class="modal fade" id="delete_film" tabindex="-1" role="dialog" aria-labelledby="delete_film_title"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,8 +151,8 @@
                 </div>
                 <div class="modal-body">
                     <form action="{{route('films.destroy', $film->id)}}" method="POST">
-                    @method('DELETE')
-                    @csrf
+                        @method('DELETE')
+                        @csrf
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                         <button type="submit" class="btn btn-danger">Удалить</button>
                     </form>
