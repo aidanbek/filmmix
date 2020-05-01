@@ -99,6 +99,11 @@ class FilmController extends Controller
 
     public function destroy($id)
     {
-
+        $film = Film::find($id)->first();
+        $film->genres()->detach();
+        $film->actors()->detach();
+        $film->directors()->detach();
+        $film->delete();
+        return redirect(route('films.index'));
     }
 }

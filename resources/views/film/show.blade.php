@@ -36,7 +36,7 @@
             <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#edit_film">
                 Редактировать
             </button>
-            <button type="button" class="btn btn-outline-danger btn-sm">Удалить</button>
+            <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#delete_film">Удалить</button>
         </div>
     </div>
 
@@ -124,6 +124,27 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="delete_film" tabindex="-1" role="dialog" aria-labelledby="delete_film_title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete_film_title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('films.destroy', $film->id)}}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-danger">Удалить</button>
                     </form>
                 </div>
             </div>
