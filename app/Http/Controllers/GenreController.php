@@ -51,6 +51,8 @@ class GenreController extends Controller
 
     public function destroy($id)
     {
-
+        $genre = Genre::where('id', $id)->first();
+        $genre->delete();
+        return redirect(route('genres.index'));
     }
 }
