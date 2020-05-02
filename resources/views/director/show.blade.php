@@ -1,4 +1,6 @@
 @extends('layouts.default')
+@section('title', $director->title)
+
 
 @section('content')
     <div class="row mb-3">

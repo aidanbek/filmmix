@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', $genre->title)
 
 @section('content')
     <div class="row mb-3">

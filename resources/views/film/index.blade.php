@@ -1,4 +1,6 @@
 @extends('layouts.default')
+@section('title', 'Фильмы')
+
 
 @section('content')
     <div class="row">
