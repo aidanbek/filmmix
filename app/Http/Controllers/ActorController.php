@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actor;
+use App\Film;
 use Illuminate\Http\Request;
 
 class ActorController extends Controller
@@ -15,18 +16,22 @@ class ActorController extends Controller
 
     public function create()
     {
-        return view('actor.create');
+        $films = Film::orderBy('title')->get();
+        return view('actor.create', compact('films'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required'
+            'title' => 'required|unique:users,title',
+            'films' => 'nullable|array|exists:films,id',
         ]);
 
-        Actor::create([
+        $actor = Actor::create([
             'title' => $request->title
         ]);
+
+        $actor->films()->attach($request->films);
 
         return back();
     }

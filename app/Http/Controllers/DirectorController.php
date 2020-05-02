@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-
 use App\Director;
+use App\Film;
 use Illuminate\Http\Request;
 
 class DirectorController extends Controller
@@ -17,18 +16,22 @@ class DirectorController extends Controller
 
     public function create()
     {
-        return view('director.create');
+        $films = Film::orderBy('title')->get();
+        return view('director.create', compact('films'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required'
+            'title' => 'required',
+            'films' => 'nullable|array|exists:films,id',
         ]);
 
-        Director::create([
+        $director = Director::create([
             'title' => $request->title
         ]);
+
+        $director->films()->attach($request->films);
 
         return back();
     }

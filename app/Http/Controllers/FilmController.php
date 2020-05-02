@@ -71,7 +71,7 @@ class FilmController extends Controller
             'genres' => 'nullable|array|exists:genres,id'
         ]);
 
-        $film = Film::find($id)->first();
+        $film = Film::where('id', $id)->first();
         $film->title = $request->title;
         $film->prod_year = $request->prod_year;
         $film->save();

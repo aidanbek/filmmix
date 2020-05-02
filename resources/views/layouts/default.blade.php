@@ -10,7 +10,7 @@
 @include('components.navbar')
 @include('components.header')
 
-<body style="background-color: #212529">
+<body>
 
 <div class="container">
     <div class="card">

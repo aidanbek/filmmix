@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Film;
 use App\Genre;
 use Illuminate\Http\Request;
 
@@ -15,18 +16,22 @@ class GenreController extends Controller
 
     public function create()
     {
-        return view('genre.create');
+        $films = Film::orderBy('title')->get();
+        return view('genre.create', compact('films'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'title'=>'required'
+            'title'=>'required',
+            'films' => 'nullable|array|exists:films,id',
         ]);
 
-        Genre::create([
+        $genre = Genre::create([
             'title' => $request->title
         ]);
+
+        $genre->films()->attach($request->films);
 
         return back();
     }
