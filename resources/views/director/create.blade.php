@@ -2,6 +2,7 @@
 @section('title', 'Добавить режиссера')
 
 @section('content')
+    @include('components.title_row', ['title' => 'Добавить режиссера'])
     <div class="row">
         <div class="col-md-12">
             <form action="{{route('directors.store')}}" method="POST">

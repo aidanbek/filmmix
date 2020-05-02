@@ -3,11 +3,7 @@
 
 
 @section('content')
-    <div class="row mb-3">
-        <div class="col-sm-12">
-            <h1>{{$director->title}}</h1>
-        </div>
-    </div>
+    @include('components.title_row', ['title' => $director->title])
     <div class="row">
         <div class="col-sm-12">
             @include('components.film_table', ['films' => $director->films])
@@ -15,6 +11,12 @@
     </div>
     <div class="row mb-3">
         <div class="col-sm-12">
+            <button type="button"
+                    class="btn btn-outline-primary btn-sm"
+                    data-toggle="modal"
+                    data-target="#edit_director">
+                Редактировать
+            </button>
             @if($director->films->count() === 0)
                 <button type="button"
                         class="btn btn-outline-danger btn-sm"
@@ -22,6 +24,29 @@
                         data-target="#delete_director">Удалить
                 </button>
             @endif
+        </div>
+    </div>
+
+    <div class="modal fade" id="edit_director" tabindex="-1" role="dialog" aria-labelledby="edit_director_title"
+         aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit_director_title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('directors.update', $director->id)}}" method="POST">
+                        @method('PATCH')
+                        @csrf
+
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

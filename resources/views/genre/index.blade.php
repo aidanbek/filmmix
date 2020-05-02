@@ -2,6 +2,7 @@
 @section('title', 'Жанры')
 
 @section('content')
+    @include('components.title_row', ['title' => 'Жанры'])
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover table-bordered">

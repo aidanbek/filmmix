@@ -3,6 +3,11 @@
 
 @section('content')
     <div class="row">
+        <div class="col-sm-12">
+            <h1>Актеры</h1>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <table class="table table-hover table-bordered">
                 <thead>

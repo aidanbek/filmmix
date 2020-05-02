@@ -2,6 +2,7 @@
 @section('title', 'Добавить жанр')
 
 @section('content')
+    @include('components.title_row', ['title' => 'Добавить жанр'])
     <div class="row">
         <div class="col-md-12">
             <form action="{{route('genres.store')}}" method="POST">

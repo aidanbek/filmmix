@@ -2,6 +2,7 @@
 @section('title', 'Добавить фильм')
 
 @section('content')
+    @include('components.title_row', ['title' => 'Добавить фильм'])
     <div class="row">
         <div class="col-md-12">
             <form action="{{route('films.store')}}" method="POST">

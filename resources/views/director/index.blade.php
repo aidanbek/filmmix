@@ -2,6 +2,7 @@
 @section('title', 'Режиссеры')
 
 @section('content')
+    @include('components.title_row', ['title' => 'Режиссеры'])
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover table-bordered">
