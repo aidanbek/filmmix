@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @method static orderBy(string $string)
+ */
 class Actor extends User
 {
     protected $attributes = ['is_actor' => true];

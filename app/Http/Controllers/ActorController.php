@@ -41,17 +41,27 @@ class ActorController extends Controller
         $actor = Actor::with('films', 'films.actors', 'films.genres', 'films.directors')
             ->where('id', $id)
             ->first();
-        return view('actor.show', compact('actor'));
-    }
-
-    public function edit($id)
-    {
-
+        $films = Film::orderBy('title')->get();
+        return view('actor.show', compact('actor', 'films'));
     }
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'films' => 'nullable|array|exists:films,id'
+        ]);
 
+        DB::transaction(function () use($request, $id) {
+            $actor = Actor::where('id', $id)->first();
+            $actor->title = $request->title;
+            $actor->save();
+
+            if (is_null($request->films)) $request->films = [];
+            $actor->films()->sync($request->films);
+        });
+
+        return back();
     }
 
     public function destroy($id)
