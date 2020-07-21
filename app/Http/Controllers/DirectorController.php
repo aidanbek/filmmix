@@ -44,17 +44,27 @@ class DirectorController extends Controller
         $director = Director::with('films', 'films.actors', 'films.genres', 'films.directors')
             ->where('id', $id)
             ->first();
-        return view('director.show', compact('director'));
-    }
-
-    public function edit($id)
-    {
-
+        $films = Film::orderBy('title')->get();
+        return view('director.show', compact('director', 'films'));
     }
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'films' => 'nullable|array|exists:films,id'
+        ]);
 
+        DB::transaction(function () use($request, $id) {
+            $director = Director::where('id', $id)->first();
+            $director->title = $request->title;
+            $director->save();
+
+            if (is_null($request->films)) $request->films = [];
+            $director->films()->sync($request->films);
+        });
+
+        return back();
     }
 
     public function destroy($id)

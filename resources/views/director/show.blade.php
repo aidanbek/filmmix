@@ -32,7 +32,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="edit_director_title">Modal title</h5>
+                    <h5 class="modal-title" id="edit_director_title">Редактировать</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -41,7 +41,26 @@
                     <form action="{{route('directors.update', $director->id)}}" method="POST">
                         @method('PATCH')
                         @csrf
-
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label for="title">Имя</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="title"
+                                           id="title"
+                                           value="{{$director->title}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @php $currentFilms = $director->films->pluck('id')->toArray(); @endphp
+                                    @include('components.selects.films', compact('films', 'currentFilms'))
+                                </div>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                     </form>
