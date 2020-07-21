@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actor;
 use App\Film;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ActorController extends Controller
 {
@@ -27,11 +28,10 @@ class ActorController extends Controller
             'films' => 'nullable|array|exists:films,id',
         ]);
 
-        $actor = Actor::create([
-            'title' => $request->title
-        ]);
-
-        $actor->films()->attach($request->films);
+        DB::transaction(function () use ($request) {
+            $actor = Actor::create(['title' => $request->title]);
+            $actor->films()->attach($request->films);
+        });
 
         return back();
     }

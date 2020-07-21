@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Film;
 use App\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GenreController extends Controller
 {
@@ -23,15 +24,17 @@ class GenreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'=>'required',
+            'title' => 'required',
             'films' => 'nullable|array|exists:films,id',
         ]);
 
-        $genre = Genre::create([
-            'title' => $request->title
-        ]);
+        DB::transaction(function () use ($request) {
+            $genre = Genre::create([
+                'title' => $request->title
+            ]);
 
-        $genre->films()->attach($request->films);
+            $genre->films()->attach($request->films);
+        });
 
         return back();
     }

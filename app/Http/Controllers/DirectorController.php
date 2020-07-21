@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Director;
 use App\Film;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DirectorController extends Controller
 {
@@ -27,11 +28,13 @@ class DirectorController extends Controller
             'films' => 'nullable|array|exists:films,id',
         ]);
 
-        $director = Director::create([
-            'title' => $request->title
-        ]);
+        DB::transaction(function () use ($request) {
+            $director = Director::create([
+                'title' => $request->title
+            ]);
 
-        $director->films()->attach($request->films);
+            $director->films()->attach($request->films);
+        });
 
         return back();
     }
