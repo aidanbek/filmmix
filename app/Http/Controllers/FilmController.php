@@ -13,7 +13,10 @@ class FilmController extends Controller
 {
     public function index()
     {
-        $films = Film::with('actors', 'directors', 'genres')->orderBy('title')->orderBy('prod_year')->get();
+        $films = Film::with('actors', 'directors', 'genres')
+            ->orderBy('title')
+            ->orderBy('prod_year')
+            ->get();
         return view('film.index', compact('films'));
     }
 
@@ -56,11 +59,6 @@ class FilmController extends Controller
         $genres = Genre::orderBy('title')->get();
         $film = Film::with('actors', 'directors', 'genres')->where('id', $id)->first();
         return view('film.show', compact('film', 'actors', 'directors', 'genres'));
-    }
-
-    public function edit($id)
-    {
-
     }
 
     public function update(Request $request, $id)

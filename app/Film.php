@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static create(array $array)
+ * @method static where(string $string, $id)
+ */
 class Film extends Model
 {
     protected $table = 'films';

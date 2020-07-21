@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static orderBy(string $string)
+ */
 class Genre extends Model
 {
     protected $table = 'genres';
