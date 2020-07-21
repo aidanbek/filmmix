@@ -15,8 +15,8 @@ class CreateFilmDirectorsTable extends Migration
     {
         Schema::create('film_directors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('film_id')->index();
-            $table->unsignedSmallInteger('director_id')->index();
+            $table->unsignedBigInteger('film_id')->index();
+            $table->unsignedBigInteger('director_id')->index();
             $table->unique(['film_id', 'director_id']);
             $table->timestamps();
             $table->foreign('film_id')

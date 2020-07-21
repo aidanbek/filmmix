@@ -15,8 +15,8 @@ class CreateFilmGenresTable extends Migration
     {
         Schema::create('film_genres', function (Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('film_id')->index();
-            $table->unsignedSmallInteger('genre_id')->index();
+            $table->unsignedBigInteger('film_id')->index();
+            $table->unsignedBigInteger('genre_id')->index();
             $table->unique(['film_id', 'genre_id']);
             $table->timestamps();
             $table->foreign('film_id')
