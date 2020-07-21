@@ -44,17 +44,27 @@ class GenreController extends Controller
         $genre = Genre::with('films', 'films.actors', 'films.genres', 'films.directors')
             ->where('id', $id)
             ->first();
-        return view('genre.show', compact('genre'));
-    }
-
-    public function edit($id)
-    {
-
+        $films = Film::orderBy('title')->get();
+        return view('genre.show', compact('genre', 'films'));
     }
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'films' => 'nullable|array|exists:films,id'
+        ]);
 
+        DB::transaction(function () use($request, $id) {
+            $genre = Genre::where('id', $id)->first();
+            $genre->title = $request->title;
+            $genre->save();
+
+            if (is_null($request->films)) $request->films = [];
+            $genre->films()->sync($request->films);
+        });
+
+        return back();
     }
 
     public function destroy($id)

@@ -40,7 +40,26 @@
                     <form action="{{route('genres.update', $genre->id)}}" method="POST">
                         @method('PATCH')
                         @csrf
-
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label for="title">Имя</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="title"
+                                           id="title"
+                                           value="{{$genre->title}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @php $currentFilms = $genre->films->pluck('id')->toArray(); @endphp
+                                    @include('components.selects.films', compact('films', 'currentFilms'))
+                                </div>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                     </form>
