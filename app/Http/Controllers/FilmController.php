@@ -35,14 +35,16 @@ class FilmController extends Controller
             'genres' => 'nullable|array|exists:genres,id'
         ]);
 
-        $film = Film::create([
-            'title' => $request->title,
-            'prod_year' => $request->prod_year,
-        ]);
+        DB::transaction(function () use ($request) {
+            $film = Film::create([
+                'title' => $request->title,
+                'prod_year' => $request->prod_year,
+            ]);
 
-        $film->actors()->attach($request->actors);
-        $film->directors()->attach($request->directors);
-        $film->genres()->attach($request->genres);
+            $film->actors()->attach($request->actors);
+            $film->directors()->attach($request->directors);
+            $film->genres()->attach($request->genres);
+        });
 
         return back();
     }
@@ -71,32 +73,20 @@ class FilmController extends Controller
             'genres' => 'nullable|array|exists:genres,id'
         ]);
 
-        $film = Film::where('id', $id)->first();
-        $film->title = $request->title;
-        $film->prod_year = $request->prod_year;
-        $film->save();
+        DB::transaction(function () use ($request, $id) {
+            $film = Film::where('id', $id)->first();
+            $film->title = $request->title;
+            $film->prod_year = $request->prod_year;
+            $film->save();
 
-        if (is_null($request->actors)) $request->actors = [];
-        if (is_null($request->directors)) $request->directors = [];
-        if (is_null($request->genres)) $request->genres = [];
+            if (is_null($request->actors)) $request->actors = [];
+            if (is_null($request->directors)) $request->directors = [];
+            if (is_null($request->genres)) $request->genres = [];
 
-        $existedActors = $film->actors->pluck('id')->toArray();
-        $actorsToAdd = array_diff($request->actors, $existedActors);
-        $actorsToRemove = array_diff($existedActors, $request->actors);
-        $film->actors()->attach($actorsToAdd);
-        $film->actors()->detach($actorsToRemove);
-
-        $existedDirectors = $film->directors->pluck('id')->toArray();
-        $directorsToAdd = array_diff($request->directors, $existedDirectors);
-        $directorsToRemove = array_diff($existedDirectors, $request->directors);
-        $film->directors()->attach($directorsToAdd);
-        $film->directors()->detach($directorsToRemove);
-
-        $existedGenres = $film->genres->pluck('id')->toArray();
-        $genresToAdd = array_diff($request->genres, $existedGenres);
-        $genresToRemove = array_diff($existedGenres, $request->genres);
-        $film->genres()->attach($genresToAdd);
-        $film->genres()->detach($genresToRemove);
+            $film->actors()->sync($request->actors);
+            $film->directors()->sync($request->directors);
+            $film->genres()->sync($request->genres);
+        });
 
         return back();
     }
@@ -104,10 +94,12 @@ class FilmController extends Controller
     public function destroy($id)
     {
         $film = Film::where('id', $id)->first();
-        $film->genres()->detach();
-        $film->actors()->detach();
-        $film->directors()->detach();
-        $film->delete();
+        DB::transaction(function () use ($film) {
+            $film->genres()->detach();
+            $film->actors()->detach();
+            $film->directors()->detach();
+            $film->delete();
+        });
         return redirect(route('films.index'));
     }
 }
