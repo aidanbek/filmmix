@@ -81,54 +81,24 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <label for="genres">Жанры</label>
-                                    <select class="selectpicker form-control" name="genres[]" multiple
-                                            data-live-search="true">
-                                        @php $currentGenres = $film->genres->pluck('id')->toArray(); @endphp
-                                        @foreach($genres as $genre)
-                                            @if(in_array($genre->id, $currentGenres))
-                                                <option selected value="{{$genre->id}}">{{$genre->title}}</option>
-                                            @else
-                                                <option value="{{$genre->id}}">{{$genre->title}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                    @php $currentGenres = $film->genres->pluck('id')->toArray(); @endphp
+                                    @include('components.selects.genres', compact('genres', 'currentGenres'))
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <label for="genres">Режиссеры</label>
-                                    <select class="selectpicker form-control" name="directors[]" multiple
-                                            data-live-search="true">
-                                        @php $currentDirectors = $film->directors->pluck('id')->toArray(); @endphp
-                                        @foreach($directors as $director)
-                                            @if(in_array($director->id, $currentDirectors))
-                                                <option selected value="{{$director->id}}">{{$director->title}}</option>
-                                            @else
-                                                <option value="{{$director->id}}">{{$director->title}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                    @php $currentDirectors = $film->directors->pluck('id')->toArray(); @endphp
+                                    @include('components.selects.directors', compact('directors', 'currentDirectors'))
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <label for="genres">Актеры</label>
-                                    <select class="selectpicker form-control" name="actors[]" multiple
-                                            data-live-search="true">
-                                        @php $currentActors = $film->actors->pluck('id')->toArray(); @endphp
-                                        @foreach($actors as $actor)
-                                            @if(in_array($actor->id, $currentActors))
-                                                <option selected value="{{$actor->id}}">{{$actor->title}}</option>
-                                            @else
-                                                <option value="{{$actor->id}}">{{$actor->title}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                    @php $currentActors = $film->actors->pluck('id')->toArray(); @endphp
+                                    @include('components.selects.actors', compact('actors', 'currentActors'))
                                 </div>
                             </div>
                         </div>
