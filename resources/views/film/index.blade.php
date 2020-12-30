@@ -64,7 +64,11 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            @include('components.film_table', compact('films'))
+            <div class="card">
+                <div class="card-body">
+                    @include('components.film_table', compact('films'))
+                </div>
+            </div>
         </div>
     </div>
 @endsection
