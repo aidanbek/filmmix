@@ -7,7 +7,7 @@
     <title>@yield('title', 'Filmmix')</title>
 </head>
 
-@include('components.navbar')
+@include('components.navbar', compact('navbarLinkGroups'))
 @include('components.header')
 
 <body>
