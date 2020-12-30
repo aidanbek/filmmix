@@ -55,8 +55,8 @@ class DirectorController extends Controller
             'films' => 'nullable|array|exists:films,id'
         ]);
 
-        DB::transaction(function () use($request, $id) {
-            $director = Director::where('id', $id)->first();
+        DB::transaction(function () use ($request, $id) {
+            $director = Director::findOrFail($id)->first();
             $director->title = $request->title;
             $director->save();
 
@@ -69,7 +69,7 @@ class DirectorController extends Controller
 
     public function destroy($id)
     {
-        $director = Director::where('id', $id)->first();
+        $director = Director::findOrFail($id)->first();
         $director->delete();
         return redirect(route('directors.index'));
     }

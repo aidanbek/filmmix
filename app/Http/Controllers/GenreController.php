@@ -11,7 +11,9 @@ class GenreController extends Controller
 {
     public function index()
     {
-        $genres = Genre::with('films')->orderBy('title')->get();
+        $genres = Genre::with('films')
+            ->orderBy('title')
+            ->get();
         return view('genre.index', compact('genres'));
     }
 
@@ -55,8 +57,8 @@ class GenreController extends Controller
             'films' => 'nullable|array|exists:films,id'
         ]);
 
-        DB::transaction(function () use($request, $id) {
-            $genre = Genre::where('id', $id)->first();
+        DB::transaction(function () use ($request, $id) {
+            $genre = Genre::findOrFail($id)->first();
             $genre->title = $request->title;
             $genre->save();
 
@@ -69,7 +71,7 @@ class GenreController extends Controller
 
     public function destroy($id)
     {
-        $genre = Genre::where('id', $id)->first();
+        $genre = Genre::findOrFail($id)->first();
         $genre->delete();
         return redirect(route('genres.index'));
     }

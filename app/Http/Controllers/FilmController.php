@@ -106,10 +106,12 @@ class FilmController extends Controller
 
     public function show($id)
     {
+        $film = Film::with('actors', 'directors', 'genres')
+            ->findOrFail($id)
+            ->first();
         $actors = Actor::orderBy('title')->get();
         $directors = Director::orderBy('title')->get();
         $genres = Genre::orderBy('title')->get();
-        $film = Film::with('actors', 'directors', 'genres')->findOrFail($id)->first();
         return view('film.show', compact('film', 'actors', 'directors', 'genres'));
     }
 
@@ -124,7 +126,7 @@ class FilmController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $id) {
-            $film = Film::where('id', $id)->first();
+            $film = Film::findOrFail($id)->first();
             $film->title = $request->title;
             $film->prod_year = $request->prod_year;
             $film->save();
@@ -143,7 +145,7 @@ class FilmController extends Controller
 
     public function destroy($id)
     {
-        $film = Film::where('id', $id)->first();
+        $film = Film::findOrFail($id)->first();
         DB::transaction(function () use ($film) {
             $film->genres()->detach();
             $film->actors()->detach();

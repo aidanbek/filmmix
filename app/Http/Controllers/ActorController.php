@@ -11,7 +11,9 @@ class ActorController extends Controller
 {
     public function index()
     {
-        $actors = Actor::with('films')->orderBy('title')->get();
+        $actors = Actor::with('films')
+            ->orderBy('title')
+            ->get();
         return view('actor.index', compact('actors'));
     }
 
@@ -52,8 +54,8 @@ class ActorController extends Controller
             'films' => 'nullable|array|exists:films,id'
         ]);
 
-        DB::transaction(function () use($request, $id) {
-            $actor = Actor::where('id', $id)->first();
+        DB::transaction(function () use ($request, $id) {
+            $actor = Actor::findOrFail($id)->first();
             $actor->title = $request->title;
             $actor->save();
 
@@ -66,7 +68,7 @@ class ActorController extends Controller
 
     public function destroy($id)
     {
-        $actor = Actor::where('id', $id)->first();
+        $actor = Actor::findOrFail($id)->first();
         $actor->delete();
         return redirect(route('actors.index'));
     }
