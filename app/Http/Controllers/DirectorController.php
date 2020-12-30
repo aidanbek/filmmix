@@ -42,7 +42,7 @@ class DirectorController extends Controller
     public function show($id)
     {
         $director = Director::with('films', 'films.actors', 'films.genres', 'films.directors')
-            ->where('id', $id)
+            ->findOrFail($id)
             ->first();
         $films = Film::orderBy('title')->get();
         return view('director.show', compact('director', 'films'));

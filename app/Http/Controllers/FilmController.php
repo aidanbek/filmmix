@@ -109,7 +109,7 @@ class FilmController extends Controller
         $actors = Actor::orderBy('title')->get();
         $directors = Director::orderBy('title')->get();
         $genres = Genre::orderBy('title')->get();
-        $film = Film::with('actors', 'directors', 'genres')->where('id', $id)->first();
+        $film = Film::with('actors', 'directors', 'genres')->findOrFail($id)->first();
         return view('film.show', compact('film', 'actors', 'directors', 'genres'));
     }
 

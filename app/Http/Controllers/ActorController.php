@@ -39,7 +39,7 @@ class ActorController extends Controller
     public function show($id)
     {
         $actor = Actor::with('films', 'films.actors', 'films.genres', 'films.directors')
-            ->where('id', $id)
+            ->findOrFail($id)
             ->first();
         $films = Film::orderBy('title')->get();
         return view('actor.show', compact('actor', 'films'));
