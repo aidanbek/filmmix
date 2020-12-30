@@ -55,7 +55,7 @@ class DirectorController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $id) {
-            $director = Director::findOrFail($id)->first();
+            $director = Director::findOrFail($id);
             $director->title = $request->title;
             $director->save();
 
@@ -68,7 +68,7 @@ class DirectorController extends Controller
 
     public function destroy($id)
     {
-        $director = Director::findOrFail($id)->first();
+        $director = Director::findOrFail($id);
         $director->delete();
         return redirect(route('directors.index'));
     }

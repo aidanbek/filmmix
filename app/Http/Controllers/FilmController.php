@@ -125,7 +125,7 @@ class FilmController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $id) {
-            $film = Film::findOrFail($id)->first();
+            $film = Film::findOrFail($id);
             $film->title = $request->title;
             $film->prod_year = $request->prod_year;
             $film->save();
@@ -144,7 +144,7 @@ class FilmController extends Controller
 
     public function destroy($id)
     {
-        $film = Film::findOrFail($id)->first();
+        $film = Film::findOrFail($id);
         DB::transaction(function () use ($film) {
             $film->genres()->detach();
             $film->actors()->detach();

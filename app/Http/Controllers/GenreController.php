@@ -57,7 +57,7 @@ class GenreController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $id) {
-            $genre = Genre::findOrFail($id)->first();
+            $genre = Genre::findOrFail($id);
             $genre->title = $request->title;
             $genre->save();
 
@@ -70,7 +70,7 @@ class GenreController extends Controller
 
     public function destroy($id)
     {
-        $genre = Genre::findOrFail($id)->first();
+        $genre = Genre::findOrFail($id);
         $genre->delete();
         return redirect(route('genres.index'));
     }
