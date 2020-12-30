@@ -58,8 +58,8 @@
                         @endif
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-sm-3 offset-sm-9">
-                                    <button type="submit" class="btn btn-secondary btn-block">Поиск</button>
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-outline-secondary btn-block btn-lg">Поиск</button>
                                 </div>
                             </div>
                         </div>
