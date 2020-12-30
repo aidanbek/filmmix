@@ -23,7 +23,12 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            @include('components.film_table', ['films' => $director->films])
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Фильмография</h4>
+                    @include('components.film_table', ['films' => $director->films])
+                </div>
+            </div>
         </div>
     </div>
     <div class="row mb-3">

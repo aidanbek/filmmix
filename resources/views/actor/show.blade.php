@@ -22,10 +22,15 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            @include('components.film_table', ['films' => $actor->films])
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Фильмография</h4>
+                    @include('components.film_table', ['films' => $actor->films])
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row my-3">
         <div class="col-sm-12">
             <button type="button"
                     class="btn btn-outline-primary btn-sm"
