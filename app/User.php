@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     protected $table = 'users';
-    protected $fillable = ['title', 'is_actor', 'is_director'];
+    protected $fillable = [
+        'title',
+        'is_actor',
+        'is_director',
+        'birth_date'
+    ];
 
     public static function scopeActors($query)
     {

@@ -13,6 +13,7 @@
                 <thead>
                 <tr>
                     <th>Актер</th>
+                    <th>Дата рождения</th>
                     <th>Количество фильмов</th>
                 </tr>
                 </thead>
@@ -20,6 +21,7 @@
                 @foreach($actors as $actor)
                     <tr>
                         <td>@include('components.actor_link', compact('actor'))</td>
+                        <td>{{$actor->birth_date}}</td>
                         <td>{{$actor->films->count()}}</td>
                     </tr>
                 @endforeach

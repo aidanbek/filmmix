@@ -8,8 +8,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-
-
                     <form action="{{route('films.index')}}" method="GET">
                         <div class="form-group">
                             <div class="row">

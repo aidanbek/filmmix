@@ -28,10 +28,14 @@ class ActorController extends Controller
         $request->validate([
             'title' => 'required|unique:users,title',
             'films' => 'nullable|array|exists:films,id',
+            'birth_date' => 'nullable|date'
         ]);
 
         DB::transaction(function () use ($request) {
-            $actor = Actor::create(['title' => $request->title]);
+            $actor = Actor::create([
+                'title' => $request->title,
+                'birth_date' => $request->birth_date
+            ]);
             $actor->films()->attach($request->films);
         });
 
@@ -50,13 +54,17 @@ class ActorController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'films' => 'nullable|array|exists:films,id'
+            'films' => 'nullable|array|exists:films,id',
+            'birth_date' => 'nullable|date'
         ]);
 
         DB::transaction(function () use ($request, $id) {
-            $actor = Actor::findOrFail($id)->first();
-            $actor->title = $request->title;
-            $actor->save();
+            Actor::findOrFail($id)->update([
+                'title' => $request->title,
+                'birth_date' => $request->birth_date
+            ]);
+
+            $actor = Actor::findOrFail($id);
 
             if (is_null($request->films)) $request->films = [];
             $actor->films()->sync($request->films);
@@ -67,7 +75,7 @@ class ActorController extends Controller
 
     public function destroy($id)
     {
-        $actor = Actor::findOrFail($id)->first();
+        $actor = Actor::findOrFail($id);
         $actor->delete();
         return redirect(route('actors.index'));
     }
