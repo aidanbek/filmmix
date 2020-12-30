@@ -6,7 +6,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown @if(Request::is('films*')) active @endif">
                     <a class="nav-link dropdown-toggle"
                        href="#"
                        id="navbarDropdown"
@@ -21,7 +21,7 @@
                         <a class="dropdown-item" href="{{route('films.index')}}">Список</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown @if(Request::is('actors*')) active @endif">
                     <a class="nav-link dropdown-toggle"
                        href="#"
                        id="navbarDropdown"
@@ -36,7 +36,7 @@
                         <a class="dropdown-item" href="{{route('actors.index')}}">Список</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown @if(Request::is('directors*')) active @endif">
                     <a class="nav-link dropdown-toggle"
                        href="#"
                        id="navbarDropdown"
@@ -51,7 +51,7 @@
                         <a class="dropdown-item" href="{{route('directors.index')}}">Список</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown @if(Request::is('genres*')) active @endif">
                     <a class="nav-link dropdown-toggle"
                        href="#"
                        id="navbarDropdown"
@@ -66,7 +66,7 @@
                         <a class="dropdown-item" href="{{route('genres.index')}}">Список</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown @if(Request::is('imports*')) active @endif">
                     <a class="nav-link" href="{{route('imports.index')}}">Импорт</a>
                 </li>
             </ul>
