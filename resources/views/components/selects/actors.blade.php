@@ -1,5 +1,5 @@
 <label for="films">Актеры</label>
-<select class="selectpicker form-control" name="actors[]" multiple data-live-search="true">
+<select class="selectpicker form-control" name="actors[]" multiple>
     @if(isset($currentActors))
         @foreach($actors as $actor)
             @if(in_array($actor->id, $currentActors))

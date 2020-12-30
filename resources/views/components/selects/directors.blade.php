@@ -1,5 +1,5 @@
 <label for="films">Режиссеры</label>
-<select class="selectpicker form-control" name="directors[]" multiple data-live-search="true">
+<select class="selectpicker form-control" name="directors[]" multiple>
     @if(isset($currentDirectors))
         @foreach($directors as $director)
             @if(in_array($director->id, $currentDirectors))

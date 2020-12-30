@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="genres">Жанры</label>
-                            <select class="selectpicker form-control" name="genres[]" multiple data-live-search="true">
+                            <select class="selectpicker form-control" name="genres[]" multiple>
                                 @foreach($genres as $genre)
                                     <option value="{{$genre->id}}">{{$genre->title}}</option>
                                 @endforeach
@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="genres">Режиссеры</label>
-                            <select class="selectpicker form-control" name="directors[]" multiple data-live-search="true">
+                            <select class="selectpicker form-control" name="directors[]" multiple>
                                 @foreach($directors as $director)
                                     <option value="{{$director->id}}">{{$director->title}}</option>
                                 @endforeach
@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="genres">Актеры</label>
-                            <select class="selectpicker form-control" name="actors[]" multiple data-live-search="true">
+                            <select class="selectpicker form-control" name="actors[]" multiple>
                                 @foreach($actors as $actor)
                                     <option value="{{$actor->id}}">{{$actor->title}}</option>
                                 @endforeach

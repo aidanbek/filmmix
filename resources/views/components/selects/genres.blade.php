@@ -1,5 +1,5 @@
 <label for="films">Жанры</label>
-<select class="selectpicker form-control" name="genres[]" multiple data-live-search="true">
+<select class="selectpicker form-control" name="genres[]" multiple>
     @if(isset($currentGenres))
         @foreach($genres as $genre)
             @if(in_array($genre->id, $currentGenres))

@@ -1,7 +1,10 @@
 require('./bootstrap');
 
 $(document).ready(function () {
-    $('.selectpicker').selectpicker();
+    $('.selectpicker').selectpicker({
+        liveSearch: true
+    });
+
     $('table').DataTable({
         "language": {
             "processing": "Подождите...",
@@ -33,5 +36,4 @@ $(document).ready(function () {
             }
         }
     });
-
 });
