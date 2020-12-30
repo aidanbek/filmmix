@@ -2,7 +2,12 @@ require('./bootstrap');
 
 $(document).ready(function () {
     $('.selectpicker').selectpicker({
-        liveSearch: true
+        liveSearch: true,
+        noneSelectedText: 'Ничего не найдено',
+        noneResultsText: 'Нет совпадений',
+        actionsBox: true,
+        selectAllText: 'Выбрать все',
+        deselectAllText: 'Снять выбор'
     });
 
     $('table').DataTable({
