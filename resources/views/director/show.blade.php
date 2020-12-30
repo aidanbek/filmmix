@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row my-3">
         <div class="col-sm-12">
             <button type="button"
                     class="btn btn-outline-primary btn-sm"
