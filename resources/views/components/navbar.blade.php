@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +16,7 @@
                                data-toggle="dropdown"
                                aria-haspopup="true"
                                aria-expanded="false">
-                                {{$title}} <span class="badge badge-info">{{$group['count']}}</span>
+                                {{$title}} <span class="badge badge-secondary">{{$group['count']}}</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach($group['links'] as $link)
