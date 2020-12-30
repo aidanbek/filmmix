@@ -56,7 +56,13 @@
                                 </div>
                             </div>
                         @endif
-                        <button type="submit" class="btn btn-primary">Поиск</button>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-3 offset-sm-9">
+                                    <button type="submit" class="btn btn-secondary btn-block">Поиск</button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
