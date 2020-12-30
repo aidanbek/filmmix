@@ -66,6 +66,9 @@
                         <a class="dropdown-item" href="{{route('genres.index')}}">Список</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{{route('imports.index')}}">Импорт</a>
+                </li>
             </ul>
         </div>
     </div>
