@@ -10,7 +10,7 @@ $(document).ready(function () {
         deselectAllText: 'Снять выбор'
     });
 
-    $('table').DataTable({
+    $('.datatable-table').DataTable({
         "language": {
             "processing": "Подождите...",
             "search": "Поиск:",

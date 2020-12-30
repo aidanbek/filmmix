@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered datatable-table">
                 <thead>
                 <tr>
                     <th>Актер</th>

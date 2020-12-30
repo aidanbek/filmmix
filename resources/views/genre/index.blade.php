@@ -5,7 +5,7 @@
     @include('components.title_row', ['title' => 'Жанры'])
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered datatable-table">
                 <thead>
                 <tr>
                     <th>Название</th>
