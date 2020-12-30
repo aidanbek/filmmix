@@ -9,6 +9,7 @@
                 <thead>
                 <tr>
                     <th>Режиссер</th>
+                    <th>Дата рождения</th>
                     <th>Количество фильмов</th>
                 </tr>
                 </thead>
@@ -16,6 +17,7 @@
                 @foreach($directors as $director)
                     <tr>
                         <td>@include('components.director_link', compact('director'))</td>
+                        <td>{{$director->birth_date}}</td>
                         <td>{{$director->films->count()}}</td>
                     </tr>
                 @endforeach

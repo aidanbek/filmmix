@@ -26,11 +26,13 @@ class DirectorController extends Controller
         $request->validate([
             'title' => 'required',
             'films' => 'nullable|array|exists:films,id',
+            'birth_date' => 'nullable|date'
         ]);
 
         DB::transaction(function () use ($request) {
             $director = Director::create([
-                'title' => $request->title
+                'title' => $request->title,
+                'birth_date' => $request->birth_date
             ]);
 
             $director->films()->attach($request->films);
@@ -51,13 +53,17 @@ class DirectorController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'films' => 'nullable|array|exists:films,id'
+            'films' => 'nullable|array|exists:films,id',
+            'birth_date' => 'nullable|date'
         ]);
 
         DB::transaction(function () use ($request, $id) {
+            Director::findOrFail($id)->update([
+                'title' => $request->title,
+                'birth_date' => $request->birth_date
+            ]);
+
             $director = Director::findOrFail($id);
-            $director->title = $request->title;
-            $director->save();
 
             if (is_null($request->films)) $request->films = [];
             $director->films()->sync($request->films);
