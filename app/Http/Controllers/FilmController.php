@@ -107,8 +107,7 @@ class FilmController extends Controller
     public function show($id)
     {
         $film = Film::with('actors', 'directors', 'genres')
-            ->findOrFail($id)
-            ->first();
+            ->findOrFail($id);
         $actors = Actor::orderBy('title')->get();
         $directors = Director::orderBy('title')->get();
         $genres = Genre::orderBy('title')->get();
