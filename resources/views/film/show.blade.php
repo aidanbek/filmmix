@@ -4,15 +4,21 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
-            <div class="jumbotron">
-                <h1 class="display-4">{{$film->title}}
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <div class="container text-center">
+                    <h1 class="display-4">{{$film->title}}</h1>
                     @if(!is_null($film->prod_year))
-                        <span class="badge badge-light">{{$film->prod_year}}</span>
+                        <a href="{{route('films.index', ['prod_year' => $film->prod_year])}}"
+                           class="badge badge-primary">
+                            {{$film->prod_year}}
+                        </a>
                     @endif
-                </h1>
-                @foreach($film->genres as $genre)
-                    <a href="{{route('genres.show', $genre->id)}}" class="badge badge-primary">{{$genre->title}}</a>
-                @endforeach
+                    @foreach($film->genres as $genre)
+                        <a href="{{route('genres.show', $genre->id)}}" class="badge badge-primary">
+                            {{$genre->title}}
+                        </a>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
