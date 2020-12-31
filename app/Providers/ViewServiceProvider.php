@@ -21,13 +21,16 @@ class ViewServiceProvider extends ServiceProvider
                     'links' => [
                         [
                             'title' => 'Добавить',
-                            'route' => 'films.create'
+                            'route' => 'films.create',
+                            'icon' => 'plus-circle'
                         ],
                         [
                             'title' => 'Список',
-                            'route' => 'films.index'
+                            'route' => 'films.index',
+                            'icon' => 'card-list'
                         ]
-                    ]
+                    ],
+                    'icon' => 'film'
                 ],
 
                 'Актеры' => [
@@ -36,13 +39,16 @@ class ViewServiceProvider extends ServiceProvider
                     'links' => [
                         [
                             'title' => 'Добавить',
-                            'route' => 'actors.create'
+                            'route' => 'actors.create',
+                            'icon' => 'person-plus'
                         ],
                         [
                             'title' => 'Список',
-                            'route' => 'actors.index'
+                            'route' => 'actors.index',
+                            'icon' => 'card-list'
                         ]
-                    ]
+                    ],
+                    'icon' => 'people'
                 ],
 
                 'Режиссеры' => [
@@ -51,13 +57,16 @@ class ViewServiceProvider extends ServiceProvider
                     'links' => [
                         [
                             'title' => 'Добавить',
-                            'route' => 'directors.create'
+                            'route' => 'directors.create',
+                            'icon' => 'person-plus'
                         ],
                         [
                             'title' => 'Список',
-                            'route' => 'directors.index'
+                            'route' => 'directors.index',
+                            'icon' => 'card-list'
                         ]
-                    ]
+                    ],
+                    'icon' => 'people'
                 ],
 
                 'Жанры' => [
@@ -66,13 +75,16 @@ class ViewServiceProvider extends ServiceProvider
                     'links' => [
                         [
                             'title' => 'Добавить',
-                            'route' => 'genres.create'
+                            'route' => 'genres.create',
+                            'icon' => 'tag'
                         ],
                         [
                             'title' => 'Список',
-                            'route' => 'genres.index'
+                            'route' => 'genres.index',
+                            'icon' => 'card-list'
                         ]
-                    ]
+                    ],
+                    'icon' => 'tags'
                 ],
 
                 'Импорт' => [
@@ -83,7 +95,8 @@ class ViewServiceProvider extends ServiceProvider
                             'title' => 'Импорт',
                             'route' => 'imports.index'
                         ]
-                    ]
+                    ],
+                    'icon' => 'cloud-upload'
                 ],
 
             ];

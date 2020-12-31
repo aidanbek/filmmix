@@ -16,12 +16,14 @@
                                data-toggle="dropdown"
                                aria-haspopup="true"
                                aria-expanded="false">
-                                {{$title}} <span class="badge badge-secondary">{{$group['count']}}</span>
+                                <i class="bi bi-{{$group['icon']}}"></i>
+                                {{$title}}
+                                <span class="badge badge-secondary">{{$group['count']}}</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach($group['links'] as $link)
                                     <a class="dropdown-item" href="{{route($link['route'])}}">
-                                        {{$link['title']}}
+                                        <i class="bi bi-{{$link['icon']}}"></i> {{$link['title']}}
                                     </a>
                                 @endforeach
                             </div>
@@ -29,7 +31,7 @@
                     @else
                         <li class="nav-item dropdown @if(Request::is($group['matcher'])) active @endif">
                             <a class="nav-link" href="{{route($group['links'][0]['route'])}}">
-                                {{$group['links'][0]['title']}}
+                                <i class="bi bi-{{$group['icon']}}"></i> {{$group['links'][0]['title']}}
                             </a>
                         </li>
                     @endif
