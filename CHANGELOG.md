@@ -1,5 +1,10 @@
 # Release Notes
 
+## [0.2.0 (2021-08-30)](https://github.com/aidanbek/filmmix/compare/0.1.3...0.2.0)
+
+### Changed
+- Update composer.lock and package-lock.json
+
 ## [0.1.3 (2021-08-30)](https://github.com/aidanbek/filmmix/compare/0.1.2...0.1.3)
 
 ### Refactoring
