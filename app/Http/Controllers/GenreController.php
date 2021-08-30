@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Genre\StoreGenreRequest;
+use App\Http\Requests\Genre\UpdateGenreRequest;
 use App\Models\Film;
 use App\Models\Genre;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GenreController extends Controller
@@ -23,13 +24,8 @@ class GenreController extends Controller
         return view('genre.create', compact('films'));
     }
 
-    public function store(Request $request)
+    public function store(StoreGenreRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'films' => ['nullable', 'array', 'exists:films,id'],
-        ]);
-
         DB::transaction(function () use ($request) {
             $genre = new Genre();
             $genre->title = $request->title;
@@ -49,18 +45,13 @@ class GenreController extends Controller
         return view('genre.show', compact('genre', 'films'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateGenreRequest $request, $id)
     {
-        $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'films' => ['nullable', 'array', 'exists:films,id']
-        ]);
-
         DB::transaction(function () use ($request, $id) {
             $genre = Genre::findOrFail($id);
             $genre->title = $request->title;
             $genre->save();
-            $genre->films()->sync($request->films ?? []);
+            $genre->films()->sync($request->films);
         });
 
         return back();

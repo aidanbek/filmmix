@@ -2,52 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Film\SearchFilmsRequest;
+use App\Http\Requests\Film\StoreFilmRequest;
+use App\Http\Requests\Film\UpdateFilmRequest;
 use App\Models\Actor;
 use App\Models\Director;
 use App\Models\Film;
-use App\Models\FilmActor;
-use App\Models\FilmDirector;
-use App\Models\FilmGenre;
 use App\Models\Genre;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FilmController extends Controller
 {
-    public function index(Request $request)
+    public function index(SearchFilmsRequest $request)
     {
-        $request->validate([
-            'title' => ['nullable', 'string', 'max:255'],
-            'prod_year' => ['nullable', 'integer', 'min:1800', 'max:3000'],
-            'actors' => ['nullable', 'array', 'exists:users,id'],
-            'directors' => ['nullable', 'array', 'exists:users,id'],
-            'genres' => ['nullable', 'array', 'exists:genres,id']
-        ]);
-
         $films = Film::with('actors', 'directors', 'genres')
-            ->when(!is_null($request->title), function ($query) use ($request) {
+            ->when($request->title, function ($query) use ($request) {
                 return $query->where('title', $request->title);
             })
-            ->when(!is_null($request->prod_year), function ($query) use ($request) {
+            ->when($request->prod_year, function ($query) use ($request) {
                 return $query->where('prod_year', $request->prod_year);
             })
-            ->when(!is_null($request->actors), function ($query) use ($request) {
-                $filmsId = FilmActor::select('film_id')
-                    ->distinct()
-                    ->whereIn('actor_id', $request->actors);
-                return $query->whereIn('id', $filmsId);
+            ->when($request->actors, function ($query) use ($request) {
+                return $query->whereHas('actors', function ($query) use ($request) {
+                    $query->whereIn('users.id', $request->actors);
+                });
             })
-            ->when(!is_null($request->directors), function ($query) use ($request) {
-                $directorsId = FilmDirector::select('film_id')
-                    ->distinct()
-                    ->whereIn('director_id', $request->directors);
-                return $query->whereIn('id', $directorsId);
+            ->when($request->directors, function ($query) use ($request) {
+                return $query->whereHas('directors', function ($query) use ($request) {
+                    $query->whereIn('users.id', $request->directors);
+                });
             })
-            ->when(!is_null($request->genres), function ($query) use ($request) {
-                $genresId = FilmGenre::select('film_id')
-                    ->distinct()
-                    ->whereIn('genre_id', $request->genres);
-                return $query->whereIn('id', $genresId);
+            ->when($request->genres, function ($query) use ($request) {
+                return $query->whereHas('genres', function ($query) use ($request) {
+                    $query->whereIn('genres.id', $request->genres);
+                });
             })
             ->orderBy('title')
             ->orderBy('prod_year')
@@ -80,16 +68,8 @@ class FilmController extends Controller
         return view('film.create', compact('actors', 'directors', 'genres'));
     }
 
-    public function store(Request $request)
+    public function store(StoreFilmRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'prod_year' => ['required', 'integer', 'min:1800', 'max:3000'],
-            'actors' => ['nullable', 'array', 'exists:users,id'],
-            'directors' => ['nullable', 'array', 'exists:users,id'],
-            'genres' => ['nullable', 'array', 'exists:genres,id']
-        ]);
-
         DB::transaction(function () use ($request) {
             $film = new Film();
             $film->title = $request->title;
@@ -114,25 +94,17 @@ class FilmController extends Controller
         return view('film.show', compact('film', 'actors', 'directors', 'genres'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateFilmRequest $request, $id)
     {
-        $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'prod_year' => ['required', 'integer', 'min:1800', 'max:3000'],
-            'actors' => ['nullable', 'array', 'exists:users,id'],
-            'directors' => ['nullable', 'array', 'exists:users,id'],
-            'genres' => ['nullable', 'array', 'exists:genres,id']
-        ]);
-
         DB::transaction(function () use ($request, $id) {
             $film = Film::findOrFail($id);
             $film->title = $request->title;
             $film->prod_year = $request->prod_year;
             $film->save();
 
-            $film->actors()->sync($request->actors ?? []);
-            $film->directors()->sync($request->directors ?? []);
-            $film->genres()->sync($request->genres ?? []);
+            $film->actors()->sync($request->actors);
+            $film->directors()->sync($request->directors);
+            $film->genres()->sync($request->genres);
         });
 
         return back();

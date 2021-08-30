@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
@@ -16,17 +17,17 @@ class User extends Model
         'birth_date'
     ];
 
-    public function scopeOrdered($query)
+    public function scopeOrdered(Builder $query): Builder
     {
         return $query->orderBy('title');
     }
 
-    public static function scopeActors($query)
+    public static function scopeActors(Builder $query): Builder
     {
         return $query->where('is_actor', true);
     }
 
-    public static function scopeDirectors($query)
+    public static function scopeDirectors(Builder $query): Builder
     {
         return $query->where('is_director', true);
     }
