@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actor;
-use App\Film;
+use App\Models\Actor;
+use App\Models\Film;
 use Illuminate\Http\Request;
 
 class ImportController extends Controller
@@ -16,8 +16,8 @@ class ImportController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'import_type' => 'required|string',
-            'import_data' => 'required|string',
+            'import_type' => ['required', 'string'],
+            'import_data' => ['required', 'string'],
         ]);
 
         $import_data_array = explode(',', $request->import_data);

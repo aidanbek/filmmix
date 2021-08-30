@@ -118,6 +118,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'prod_year' => 'год'
+    ],
 
 ];

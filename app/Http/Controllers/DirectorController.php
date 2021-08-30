@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Director;
-use App\Film;
+use App\Models\Director;
+use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,9 +24,9 @@ class DirectorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'films' => 'nullable|array|exists:films,id',
-            'birth_date' => 'nullable|date'
+            'title' => ['required'],
+            'films' => ['nullable', 'array', 'exists:films,id'],
+            'birth_date' => ['nullable', 'date']
         ]);
 
         DB::transaction(function () use ($request) {
@@ -52,9 +52,9 @@ class DirectorController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'films' => 'nullable|array|exists:films,id',
-            'birth_date' => 'nullable|date'
+            'title' => ['required', 'string', 'max:255'],
+            'films' => ['nullable', 'array', 'exists:films,id'],
+            'birth_date' => ['nullable', 'date']
         ]);
 
         DB::transaction(function () use ($request, $id) {
@@ -64,9 +64,7 @@ class DirectorController extends Controller
             ]);
 
             $director = Director::findOrFail($id);
-
-            if (is_null($request->films)) $request->films = [];
-            $director->films()->sync($request->films);
+            $director->films()->sync($request->films ?? []);
         });
 
         return back();

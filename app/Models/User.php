@@ -1,12 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
     protected $table = 'users';
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'title',
         'is_actor',

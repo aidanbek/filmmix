@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Film;
-use App\Genre;
+use App\Models\Film;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,8 +26,8 @@ class GenreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'films' => 'nullable|array|exists:films,id',
+            'title' => ['required', 'string', 'max:255'],
+            'films' => ['nullable', 'array', 'exists:films,id'],
         ]);
 
         DB::transaction(function () use ($request) {
@@ -52,17 +52,15 @@ class GenreController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'films' => 'nullable|array|exists:films,id'
+            'title' => ['required', 'string', 'max:255'],
+            'films' => ['nullable', 'array', 'exists:films,id']
         ]);
 
         DB::transaction(function () use ($request, $id) {
             $genre = Genre::findOrFail($id);
             $genre->title = $request->title;
             $genre->save();
-
-            if (is_null($request->films)) $request->films = [];
-            $genre->films()->sync($request->films);
+            $genre->films()->sync($request->films ?? []);
         });
 
         return back();

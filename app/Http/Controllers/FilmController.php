@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Actor;
-use App\Director;
-use App\Film;
-use App\FilmActor;
-use App\FilmDirector;
-use App\FilmGenre;
-use App\Genre;
+use App\Models\Actor;
+use App\Models\Director;
+use App\Models\Film;
+use App\Models\FilmActor;
+use App\Models\FilmDirector;
+use App\Models\FilmGenre;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,11 +17,11 @@ class FilmController extends Controller
     public function index(Request $request)
     {
         $request->validate([
-            'title' => 'nullable|string|max:255',
-            'prod_year' => 'nullable|integer|min:1800|max:3000',
-            'actors' => 'nullable|array|exists:users,id',
-            'directors' => 'nullable|array|exists:users,id',
-            'genres' => 'nullable|array|exists:genres,id'
+            'title' => ['nullable', 'string', 'max:255'],
+            'prod_year' => ['nullable', 'integer', 'min:1800', 'max:3000'],
+            'actors' => ['nullable', 'array', 'exists:users,id'],
+            'directors' => ['nullable', 'array', 'exists:users,id'],
+            'genres' => ['nullable', 'array', 'exists:genres,id']
         ]);
 
         $films = Film::with('actors', 'directors', 'genres')
@@ -83,11 +83,11 @@ class FilmController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'prod_year' => 'required|integer|min:1800|max:3000',
-            'actors' => 'nullable|array|exists:users,id',
-            'directors' => 'nullable|array|exists:users,id',
-            'genres' => 'nullable|array|exists:genres,id'
+            'title' => ['required', 'string', 'max:255'],
+            'prod_year' => ['required', 'integer', 'min:1800', 'max:3000'],
+            'actors' => ['nullable', 'array', 'exists:users,id'],
+            'directors' => ['nullable', 'array', 'exists:users,id'],
+            'genres' => ['nullable', 'array', 'exists:genres,id']
         ]);
 
         DB::transaction(function () use ($request) {
@@ -117,11 +117,11 @@ class FilmController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'prod_year' => 'required|integer|min:1800|max:3000',
-            'actors' => 'nullable|array|exists:users,id',
-            'directors' => 'nullable|array|exists:users,id',
-            'genres' => 'nullable|array|exists:genres,id'
+            'title' => ['required', 'string', 'max:255'],
+            'prod_year' => ['required', 'integer', 'min:1800', 'max:3000'],
+            'actors' => ['nullable', 'array', 'exists:users,id'],
+            'directors' => ['nullable', 'array', 'exists:users,id'],
+            'genres' => ['nullable', 'array', 'exists:genres,id']
         ]);
 
         DB::transaction(function () use ($request, $id) {
@@ -130,13 +130,9 @@ class FilmController extends Controller
             $film->prod_year = $request->prod_year;
             $film->save();
 
-            if (is_null($request->actors)) $request->actors = [];
-            if (is_null($request->directors)) $request->directors = [];
-            if (is_null($request->genres)) $request->genres = [];
-
-            $film->actors()->sync($request->actors);
-            $film->directors()->sync($request->directors);
-            $film->genres()->sync($request->genres);
+            $film->actors()->sync($request->actors ?? []);
+            $film->directors()->sync($request->directors ?? []);
+            $film->genres()->sync($request->genres ?? []);
         });
 
         return back();

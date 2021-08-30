@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Actor;
-use App\Director;
-use App\Film;
-use App\Genre;
+use App\Models\Actor;
+use App\Models\Director;
+use App\Models\Film;
+use App\Models\Genre;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

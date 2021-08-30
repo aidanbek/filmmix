@@ -1,15 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @method static orderBy(string $string)
- */
 class Genre extends Model
 {
     protected $table = 'genres';
+    protected $primaryKey = 'id';
     protected $fillable = ['title'];
 
     public function films()
