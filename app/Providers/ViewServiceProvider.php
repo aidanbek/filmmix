@@ -13,7 +13,7 @@ class ViewServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        View::composer('*', function ($view) {
+        View::composer('layouts.default', function ($view) {
             $navbarLinkGroups = [
                 'Фильмы' => [
                     'matcher' => 'films*',

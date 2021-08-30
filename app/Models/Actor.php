@@ -13,7 +13,7 @@ class Actor extends User
         parent::boot();
 
         static::addGlobalScope('actors', function (Builder $builder) {
-            $builder->where('is_actor',  true);
+            $builder->actors();
         });
     }
 

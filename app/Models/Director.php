@@ -13,7 +13,7 @@ class Director extends User
         parent::boot();
 
         static::addGlobalScope('directors', function (Builder $builder) {
-            $builder->where('is_director',  true);
+            $builder->directors();
         });
     }
 
