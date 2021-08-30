@@ -12,14 +12,14 @@ class ActorController extends Controller
     public function index()
     {
         $actors = Actor::with('films')
-            ->orderBy('title')
+            ->ordered()
             ->get();
         return view('actor.index', compact('actors'));
     }
 
     public function create()
     {
-        $films = Film::orderBy('title')->get();
+        $films = Film::ordered()->get();
         return view('actor.create', compact('films'));
     }
 
@@ -32,10 +32,11 @@ class ActorController extends Controller
         ]);
 
         DB::transaction(function () use ($request) {
-            $actor = Actor::create([
-                'title' => $request->title,
-                'birth_date' => $request->birth_date
-            ]);
+            $actor = new Actor();
+            $actor->title = $request->title;
+            $actor->birth_date = $request->birth_date;
+            $actor->save();
+
             $actor->films()->attach($request->films);
         });
 
@@ -46,7 +47,7 @@ class ActorController extends Controller
     {
         $actor = Actor::with('films', 'films.actors', 'films.genres', 'films.directors')
             ->findOrFail($id);
-        $films = Film::orderBy('title')->get();
+        $films = Film::ordered()->get();
         return view('actor.show', compact('actor', 'films'));
     }
 
@@ -59,12 +60,11 @@ class ActorController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $id) {
-            Actor::findOrFail($id)->update([
-                'title' => $request->title,
-                'birth_date' => $request->birth_date
-            ]);
-
             $actor = Actor::findOrFail($id);
+            $actor->title = $request->title;
+            $actor->birth_date = $request->birth_date;
+            $actor->save();
+
             $actor->films()->sync($request->films ?? []);
         });
 
@@ -73,8 +73,7 @@ class ActorController extends Controller
 
     public function destroy($id)
     {
-        $actor = Actor::findOrFail($id);
-        $actor->delete();
+        Actor::findOrFail($id)->delete();
         return redirect(route('actors.index'));
     }
 }

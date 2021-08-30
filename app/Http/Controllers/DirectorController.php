@@ -11,13 +11,13 @@ class DirectorController extends Controller
 {
     public function index()
     {
-        $directors = Director::orderBy('title')->get();
+        $directors = Director::ordered()->get();
         return view('director.index', compact('directors'));
     }
 
     public function create()
     {
-        $films = Film::orderBy('title')->get();
+        $films = Film::ordered()->get();
         return view('director.create', compact('films'));
     }
 
@@ -30,10 +30,10 @@ class DirectorController extends Controller
         ]);
 
         DB::transaction(function () use ($request) {
-            $director = Director::create([
-                'title' => $request->title,
-                'birth_date' => $request->birth_date
-            ]);
+            $director = new Director();
+            $director->title = $request->title;
+            $director->birth_date = $request->birth_date;
+            $director->save();
 
             $director->films()->attach($request->films);
         });
@@ -45,7 +45,7 @@ class DirectorController extends Controller
     {
         $director = Director::with('films', 'films.actors', 'films.genres', 'films.directors')
             ->findOrFail($id);
-        $films = Film::orderBy('title')->get();
+        $films = Film::ordered()->get();
         return view('director.show', compact('director', 'films'));
     }
 
@@ -58,12 +58,11 @@ class DirectorController extends Controller
         ]);
 
         DB::transaction(function () use ($request, $id) {
-            Director::findOrFail($id)->update([
-                'title' => $request->title,
-                'birth_date' => $request->birth_date
-            ]);
-
             $director = Director::findOrFail($id);
+            $director->title = $request->title;
+            $director->birth_date = $request->birth_date;
+            $director->save();
+
             $director->films()->sync($request->films ?? []);
         });
 
@@ -72,8 +71,7 @@ class DirectorController extends Controller
 
     public function destroy($id)
     {
-        $director = Director::findOrFail($id);
-        $director->delete();
+        Director::findOrFail($id)->delete();
         return redirect(route('directors.index'));
     }
 }

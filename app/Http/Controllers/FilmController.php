@@ -53,9 +53,9 @@ class FilmController extends Controller
             ->orderBy('prod_year')
             ->get();
 
-        $actors = Actor::orderBy('title')->get();
-        $directors = Director::orderBy('title')->get();
-        $genres = Genre::orderBy('title')->get();
+        $actors = Actor::ordered()->get();
+        $directors = Director::ordered()->get();
+        $genres = Genre::ordered()->get();
         $currentActors = $request->actors;
         $currentDirectors = $request->directors;
         $currentGenres = $request->genres;
@@ -74,9 +74,9 @@ class FilmController extends Controller
 
     public function create()
     {
-        $actors = Actor::orderBy('title')->get();
-        $directors = Director::orderBy('title')->get();
-        $genres = Genre::orderBy('title')->get();
+        $actors = Actor::ordered()->get();
+        $directors = Director::ordered()->get();
+        $genres = Genre::ordered()->get();
         return view('film.create', compact('actors', 'directors', 'genres'));
     }
 
@@ -91,10 +91,10 @@ class FilmController extends Controller
         ]);
 
         DB::transaction(function () use ($request) {
-            $film = Film::create([
-                'title' => $request->title,
-                'prod_year' => $request->prod_year,
-            ]);
+            $film = new Film();
+            $film->title = $request->title;
+            $film->prod_year = $request->prod_year;
+            $film->save();
 
             $film->actors()->attach($request->actors);
             $film->directors()->attach($request->directors);
@@ -108,9 +108,9 @@ class FilmController extends Controller
     {
         $film = Film::with('actors', 'directors', 'genres')
             ->findOrFail($id);
-        $actors = Actor::orderBy('title')->get();
-        $directors = Director::orderBy('title')->get();
-        $genres = Genre::orderBy('title')->get();
+        $actors = Actor::ordered()->get();
+        $directors = Director::ordered()->get();
+        $genres = Genre::ordered()->get();
         return view('film.show', compact('film', 'actors', 'directors', 'genres'));
     }
 

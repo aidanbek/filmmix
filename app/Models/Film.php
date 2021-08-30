@@ -10,6 +10,11 @@ class Film extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['title', 'prod_year'];
 
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('title');
+    }
+
     public function actors()
     {
         return $this->belongsToMany(Actor::class, FilmActor::class);

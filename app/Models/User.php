@@ -16,6 +16,11 @@ class User extends Model
         'birth_date'
     ];
 
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('title');
+    }
+
     public static function scopeActors($query)
     {
         return $query->where('is_actor', true);
