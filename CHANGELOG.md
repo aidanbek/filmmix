@@ -1,5 +1,11 @@
 # Release Notes
 
+## [0.1.3 (2021-08-30)](https://github.com/aidanbek/filmmix/compare/0.1.2...0.1.3)
+
+### Refactoring
+- Add validation rules
+- Improve requests validation
+
 ## [0.1.2 (2021-08-30)](https://github.com/aidanbek/filmmix/compare/0.1.1...0.1.2)
 
 ### Refactoring

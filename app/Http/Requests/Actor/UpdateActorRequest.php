@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Actor;
 
+use App\Rules\Actor\ActorTitleHasProperLengthRule;
+use App\Rules\Film\FilmExistsRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -21,8 +23,9 @@ class UpdateActorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string','max:255'],
-            'films' => ['nullable', 'array', 'exists:films,id'],
+            'title' => ['bail', 'required', 'string', new ActorTitleHasProperLengthRule()],
+            'films' => ['nullable', 'array'],
+            'films.*' => ['bail', 'required', 'integer', new FilmExistsRule()],
             'birth_date' => ['nullable', 'date']
         ];
     }

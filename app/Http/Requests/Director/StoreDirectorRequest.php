@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Director;
 
+use App\Rules\Director\DirectorTitleHasProperLengthRule;
+use App\Rules\Film\FilmExistsRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -21,8 +23,9 @@ class StoreDirectorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string','max:255'],
-            'films' => ['nullable', 'array', 'exists:films,id'],
+            'title' => ['bail', 'required', 'string', new DirectorTitleHasProperLengthRule()],
+            'films' => ['nullable', 'array'],
+            'films.*' => ['bail', 'required', 'integer', new FilmExistsRule()],
             'birth_date' => ['nullable', 'date']
         ];
     }

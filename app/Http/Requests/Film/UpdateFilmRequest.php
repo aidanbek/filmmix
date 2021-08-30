@@ -2,6 +2,11 @@
 
 namespace App\Http\Requests\Film;
 
+use App\Rules\Actor\ActorExistsRule;
+use App\Rules\Director\DirectorExistsRule;
+use App\Rules\Film\FilmProductionYearBetweenDatesRule;
+use App\Rules\Film\FilmTitleHasProperLengthRule;
+use App\Rules\Genre\GenreExistsRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -23,11 +28,14 @@ class UpdateFilmRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'prod_year' => ['required', 'integer', 'min:1800', 'max:3000'],
-            'actors' => ['nullable', 'array', 'exists:users,id'],
-            'directors' => ['nullable', 'array', 'exists:users,id'],
-            'genres' => ['nullable', 'array', 'exists:genres,id']
+            'title' => ['bail', 'required', 'string', new FilmTitleHasProperLengthRule()],
+            'prod_year' => ['bail', 'required', 'integer', new FilmProductionYearBetweenDatesRule()],
+            'actors' => ['nullable', 'array'],
+            'actors.*' => ['bail', 'required', 'integer', new ActorExistsRule()],
+            'directors' => ['nullable', 'array'],
+            'directors.*' => ['bail', 'required', 'integer', new DirectorExistsRule()],
+            'genres' => ['nullable', 'array'],
+            'genres.*' => ['bail', 'required', 'integer', new GenreExistsRule()]
         ];
     }
 }

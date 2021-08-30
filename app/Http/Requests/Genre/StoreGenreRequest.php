@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Genre;
 
+use App\Rules\Film\FilmExistsRule;
+use App\Rules\Genre\GenreTitleHasProperLengthRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -20,8 +22,9 @@ class StoreGenreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'films' => ['nullable', 'array', 'exists:films,id'],
+            'title' => ['bail', 'required', 'string', new GenreTitleHasProperLengthRule()],
+            'films' => ['nullable', 'array'],
+            'films.*' => ['bail', 'required', 'integer', new FilmExistsRule()],
         ];
     }
 }
