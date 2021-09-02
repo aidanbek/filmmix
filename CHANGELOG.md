@@ -1,5 +1,10 @@
 # Release Notes
 
+## [0.3.0 (2021-09-03)](https://github.com/aidanbek/filmmix/compare/0.2.2...0.3.0)
+
+### Added
+- Created and update info to pages
+
 ## [0.2.2 (2021-09-02)](https://github.com/aidanbek/filmmix/compare/0.2.1...0.2.2)
 
 ### Refactoring

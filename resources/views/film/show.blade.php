@@ -56,6 +56,12 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-12">
+            @include('components.timestamps', ['element' => $film])
+        </div>
+    </div>
+
     <div class="modal fade" id="edit_film" tabindex="-1" role="dialog" aria-labelledby="edit_film_title"
          aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
