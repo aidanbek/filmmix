@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\Director
@@ -44,7 +45,7 @@ class Director extends User
         });
     }
 
-    public function films()
+    public function films(): BelongsToMany
     {
         return $this->belongsToMany(Film::class, FilmDirector::class);
     }

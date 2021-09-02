@@ -22,36 +22,21 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="genres">Жанры</label>
-                            <select class="selectpicker form-control" name="genres[]" multiple>
-                                @foreach($genres as $genre)
-                                    <option value="{{$genre->id}}">{{$genre->title}}</option>
-                                @endforeach
-                            </select>
+                            @include('components.selects.genres', compact('genres'))
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="genres">Режиссеры</label>
-                            <select class="selectpicker form-control" name="directors[]" multiple>
-                                @foreach($directors as $director)
-                                    <option value="{{$director->id}}">{{$director->title}}</option>
-                                @endforeach
-                            </select>
+                            @include('components.selects.directors', compact('directors'))
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="genres">Актеры</label>
-                            <select class="selectpicker form-control" name="actors[]" multiple>
-                                @foreach($actors as $actor)
-                                    <option value="{{$actor->id}}">{{$actor->title}}</option>
-                                @endforeach
-                            </select>
+                            @include('components.selects.actors', compact('actors'))
                         </div>
                     </div>
                 </div>

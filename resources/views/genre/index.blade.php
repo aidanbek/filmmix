@@ -16,7 +16,7 @@
                 @foreach($genres as $genre)
                     <tr>
                         <td> @include('components.genre_link', compact('genre'))</td>
-                        <td>{{$genre->films->count()}}</td>
+                        <td>{{$genre->films_count}}</td>
                     </tr>
                 @endforeach
                 </tbody>

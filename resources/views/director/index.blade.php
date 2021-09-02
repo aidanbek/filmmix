@@ -18,7 +18,7 @@
                     <tr>
                         <td>@include('components.director_link', compact('director'))</td>
                         <td>{{$director->birth_date}}</td>
-                        <td>{{$director->films->count()}}</td>
+                        <td>{{$director->films_count}}</td>
                     </tr>
                 @endforeach
                 </tbody>

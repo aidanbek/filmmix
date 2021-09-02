@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\Genre
@@ -35,7 +36,7 @@ class Genre extends Model
         return $query->orderBy('title');
     }
 
-    public function films()
+    public function films(): BelongsToMany
     {
         return $this->belongsToMany(Film::class, FilmGenre::class);
     }

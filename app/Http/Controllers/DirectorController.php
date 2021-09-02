@@ -12,7 +12,9 @@ class DirectorController extends Controller
 {
     public function index()
     {
-        $directors = Director::ordered()->get();
+        $directors = Director::withCount('films')
+            ->ordered()
+            ->get();
         return view('director.index', compact('directors'));
     }
 

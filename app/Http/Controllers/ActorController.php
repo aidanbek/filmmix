@@ -12,7 +12,7 @@ class ActorController extends Controller
 {
     public function index()
     {
-        $actors = Actor::with('films')
+        $actors = Actor::withCount('films')
             ->ordered()
             ->get();
         return view('actor.index', compact('actors'));

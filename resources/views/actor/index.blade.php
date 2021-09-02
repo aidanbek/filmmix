@@ -22,7 +22,7 @@
                     <tr>
                         <td>@include('components.actor_link', compact('actor'))</td>
                         <td>{{$actor->birth_date}}</td>
-                        <td>{{$actor->films->count()}}</td>
+                        <td>{{$actor->films_count}}</td>
                     </tr>
                 @endforeach
                 </tbody>
