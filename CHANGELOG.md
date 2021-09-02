@@ -1,5 +1,10 @@
 # Release Notes
 
+## [0.4.1 (2021-09-03)](https://github.com/aidanbek/filmmix/compare/0.4.0...0.4.1)
+
+### Refactoring
+- Group link templates to folder
+
 ## [0.4.0 (2021-09-03)](https://github.com/aidanbek/filmmix/compare/0.3.0...0.4.0)
 
 ### Added

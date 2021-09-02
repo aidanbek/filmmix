@@ -17,7 +17,7 @@
                 <tbody>
                 @foreach($countries as $country)
                     <tr>
-                        <td> @include('components.country_link', compact('country'))</td>
+                        <td> @include('components.links.country_link', compact('country'))</td>
                         <td>{{$country->films_count}}</td>
                         <td>{{$country->actors_count}}</td>
                         <td>{{$country->directors_count}}</td>

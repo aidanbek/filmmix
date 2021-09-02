@@ -16,7 +16,7 @@
                 <tbody>
                 @foreach($directors as $director)
                     <tr>
-                        <td>@include('components.director_link', compact('director'))</td>
+                        <td>@include('components.links.director_link', compact('director'))</td>
                         <td>{{$director->birth_date}}</td>
                         <td>{{$director->films_count}}</td>
                     </tr>

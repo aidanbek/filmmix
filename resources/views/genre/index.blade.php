@@ -15,7 +15,7 @@
                 <tbody>
                 @foreach($genres as $genre)
                     <tr>
-                        <td> @include('components.genre_link', compact('genre'))</td>
+                        <td> @include('components.links.genre_link', compact('genre'))</td>
                         <td>{{$genre->films_count}}</td>
                     </tr>
                 @endforeach

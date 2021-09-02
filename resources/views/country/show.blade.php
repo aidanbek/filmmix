@@ -34,7 +34,7 @@
         <div class="col-sm-12">
             <b>Личности:</b>
             @foreach($country->users as $user)
-                @include('components.user_link', compact('user'))
+                @include('components.links.user_link', compact('user'))
             @endforeach
         </div>
     </div>

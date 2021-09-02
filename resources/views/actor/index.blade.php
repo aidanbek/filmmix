@@ -20,7 +20,7 @@
                 <tbody>
                 @foreach($actors as $actor)
                     <tr>
-                        <td>@include('components.actor_link', compact('actor'))</td>
+                        <td>@include('components.links.actor_link', compact('actor'))</td>
                         <td>{{$actor->birth_date}}</td>
                         <td>{{$actor->films_count}}</td>
                     </tr>

@@ -12,26 +12,26 @@
     <tbody>
     @foreach($films as $film)
         <tr>
-            <td>@include('components.film_link', compact('film'))</td>
+            <td>@include('components.links.film_link', compact('film'))</td>
             <td>{{$film->prod_year}}</td>
             <td>
                 @foreach($film->countries as $country)
-                    @include('components.country_link', compact('country'))
+                    @include('components.links.country_link', compact('country'))
                 @endforeach
             </td>
             <td>
                 @foreach($film->genres as $genre)
-                    @include('components.genre_link', compact('genre'))
+                    @include('components.links.genre_link', compact('genre'))
                 @endforeach
             </td>
             <td>
                 @foreach($film->directors as $director)
-                    @include('components.director_link', compact('director'))
+                    @include('components.links.director_link', compact('director'))
                 @endforeach
             </td>
             <td>
                 @foreach($film->actors as $actor)
-                    @include('components.actor_link', compact('actor'))
+                    @include('components.links.actor_link', compact('actor'))
                 @endforeach
             </td>
         </tr>

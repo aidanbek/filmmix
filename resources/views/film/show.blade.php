@@ -26,7 +26,7 @@
         <div class="col-sm-12">
             <b>Режиссеры:</b>
             @foreach($film->directors as $director)
-                @include('components.director_link', compact('director'))
+                @include('components.links.director_link', compact('director'))
             @endforeach
         </div>
     </div>
@@ -34,7 +34,7 @@
         <div class="col-sm-12">
             <b>Актеры:</b>
             @foreach($film->actors as $actor)
-                @include('components.actor_link', compact('actor'))
+                @include('components.links.actor_link', compact('actor'))
             @endforeach
         </div>
     </div>
