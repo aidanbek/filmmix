@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Director;
 
+use App\Rules\Country\CountryExistsRule;
 use App\Rules\Director\DirectorTitleHasProperLengthRule;
 use App\Rules\Film\FilmExistsRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @package App\Http\Requests\Director
  * @property string $title
  * @property string[] $films
+ * @property string[]|null $countries
  * @property string|null $birth_date
  */
 class StoreDirectorRequest extends FormRequest
@@ -26,6 +28,8 @@ class StoreDirectorRequest extends FormRequest
             'title' => ['bail', 'required', 'string', new DirectorTitleHasProperLengthRule()],
             'films' => ['nullable', 'array'],
             'films.*' => ['bail', 'required', 'integer', new FilmExistsRule()],
+            'countries' => ['nullable', 'array'],
+            'countries.*' => ['bail', 'required', 'integer', new CountryExistsRule()],
             'birth_date' => ['nullable', 'date']
         ];
     }

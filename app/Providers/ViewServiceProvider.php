@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Actor;
+use App\Models\Country;
 use App\Models\Director;
 use App\Models\Film;
 use App\Models\Genre;
@@ -85,6 +86,24 @@ class ViewServiceProvider extends ServiceProvider
                         ]
                     ],
                     'icon' => 'bi bi-tags'
+                ],
+
+                'Страны' => [
+                    'matcher' => 'countries*',
+                    'count' => Country::count(),
+                    'links' => [
+                        [
+                            'title' => 'Добавить',
+                            'route' => 'countries.create',
+                            'icon' => 'bi bi-flag'
+                        ],
+                        [
+                            'title' => 'Список',
+                            'route' => 'countries.index',
+                            'icon' => 'bi bi-map'
+                        ]
+                    ],
+                    'icon' => 'bi bi-flag'
                 ],
 
                 'Импорт' => [

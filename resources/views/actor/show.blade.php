@@ -96,6 +96,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @php $currentCountries = $actor->countries->pluck('id')->toArray(); @endphp
+                                    @include('components.selects.countries', compact('countries', 'currentCountries'))
+                                </div>
+                            </div>
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>

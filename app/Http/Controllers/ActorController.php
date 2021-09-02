@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Actor\StoreActorRequest;
 use App\Http\Requests\Actor\UpdateActorRequest;
 use App\Models\Actor;
+use App\Models\Country;
 use App\Models\Film;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +22,8 @@ class ActorController extends Controller
     public function create()
     {
         $films = Film::ordered()->get();
-        return view('actor.create', compact('films'));
+        $countries = Country::ordered()->get();
+        return view('actor.create', compact('films', 'countries'));
     }
 
     public function store(StoreActorRequest $request)
@@ -33,6 +35,7 @@ class ActorController extends Controller
             $actor->save();
 
             $actor->films()->attach($request->films);
+            $actor->countries()->attach($request->countries);
         });
 
         return back();
@@ -40,10 +43,16 @@ class ActorController extends Controller
 
     public function show($id)
     {
-        $actor = Actor::with('films', 'films.actors', 'films.genres', 'films.directors')
+        $actor = Actor::with('films')
+            ->with('films.actors')
+            ->with('films.genres')
+            ->with('films.directors')
+            ->with('films.countries')
             ->findOrFail($id);
         $films = Film::ordered()->get();
-        return view('actor.show', compact('actor', 'films'));
+        $countries = Country::ordered()->get();
+
+        return view('actor.show', compact('actor', 'films', 'countries'));
     }
 
     public function update(UpdateActorRequest $request, $id)
@@ -55,6 +64,7 @@ class ActorController extends Controller
             $actor->save();
 
             $actor->films()->sync($request->films);
+            $actor->countries()->sync($request->countries);
         });
 
         return back();

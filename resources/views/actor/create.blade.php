@@ -32,6 +32,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @include('components.selects.countries', compact('countries'))
+                        </div>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">Добавить</button>
             </form>
         </div>

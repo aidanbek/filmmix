@@ -56,6 +56,15 @@
                                 </div>
                             </div>
                         @endif
+                        @if(count($countries) > 0)
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        @include('components.selects.countries', compact('countries'))
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">

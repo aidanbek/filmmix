@@ -17,4 +17,5 @@ Route::resource('films', 'FilmController');
 Route::resource('actors', 'ActorController');
 Route::resource('directors', 'DirectorController');
 Route::resource('genres', 'GenreController');
+Route::resource('countries', 'CountryController');
 Route::resource('imports', 'ImportController')->only(['index', 'store']);

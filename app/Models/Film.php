@@ -56,4 +56,9 @@ class Film extends Model
     {
         return $this->belongsToMany(Genre::class, FilmGenre::class);
     }
+
+    public function countries(): BelongsToMany
+    {
+        return $this->belongsToMany(Country::class, FilmCountry::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Film;
 
 use App\Rules\Actor\ActorExistsRule;
+use App\Rules\Country\CountryExistsRule;
 use App\Rules\Director\DirectorExistsRule;
 use App\Rules\Film\FilmProductionYearBetweenDatesRule;
 use App\Rules\Film\FilmTitleHasProperLengthRule;
@@ -17,6 +18,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property string[]|null $actors
  * @property string[]|null $directors
  * @property string[]|null $genres
+ * @property string[]|null $countries
  */
 class SearchFilmsRequest extends FormRequest
 {
@@ -35,7 +37,9 @@ class SearchFilmsRequest extends FormRequest
             'directors' => ['nullable', 'array'],
             'directors.*' => ['bail', 'required', 'integer', new DirectorExistsRule()],
             'genres' => ['nullable', 'array'],
-            'genres.*' => ['bail', 'required', 'integer', new GenreExistsRule()]
+            'genres.*' => ['bail', 'required', 'integer', new GenreExistsRule()],
+            'countries' => ['nullable', 'array'],
+            'countries.*' => ['bail', 'required', 'integer', new CountryExistsRule()]
         ];
     }
 }

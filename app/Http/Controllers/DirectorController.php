@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Director\StoreDirectorRequest;
 use App\Http\Requests\Director\UpdateDirectorRequest;
+use App\Models\Country;
 use App\Models\Director;
 use App\Models\Film;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,9 @@ class DirectorController extends Controller
     public function create()
     {
         $films = Film::ordered()->get();
-        return view('director.create', compact('films'));
+        $countries = Country::ordered()->get();
+
+        return view('director.create', compact('films', 'countries'));
     }
 
     public function store(StoreDirectorRequest $request)
@@ -33,6 +36,7 @@ class DirectorController extends Controller
             $director->save();
 
             $director->films()->attach($request->films);
+            $director->countries()->attach($request->countries);
         });
 
         return back();
@@ -40,10 +44,16 @@ class DirectorController extends Controller
 
     public function show($id)
     {
-        $director = Director::with('films', 'films.actors', 'films.genres', 'films.directors')
+        $director = Director::with('films')
+            ->with('films.actors')
+            ->with('films.genres')
+            ->with('films.directors')
+            ->with('films.countries')
             ->findOrFail($id);
         $films = Film::ordered()->get();
-        return view('director.show', compact('director', 'films'));
+        $countries = Country::ordered()->get();
+
+        return view('director.show', compact('director', 'films', 'countries'));
     }
 
     public function update(UpdateDirectorRequest $request, $id)
@@ -55,6 +65,7 @@ class DirectorController extends Controller
             $director->save();
 
             $director->films()->sync($request->films);
+            $director->countries()->sync($request->countries);
         });
 
         return back();

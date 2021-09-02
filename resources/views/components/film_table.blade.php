@@ -3,6 +3,7 @@
     <tr>
         <th>Название</th>
         <th>Год</th>
+        <th>Страна</th>
         <th>Жанр</th>
         <th>Режиссер</th>
         <th>Актерский состав</th>
@@ -13,6 +14,11 @@
         <tr>
             <td>@include('components.film_link', compact('film'))</td>
             <td>{{$film->prod_year}}</td>
+            <td>
+                @foreach($film->countries as $country)
+                    @include('components.country_link', compact('country'))
+                @endforeach
+            </td>
             <td>
                 @foreach($film->genres as $genre)
                     @include('components.genre_link', compact('genre'))

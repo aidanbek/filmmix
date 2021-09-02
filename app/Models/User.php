@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\User
@@ -55,5 +56,27 @@ class User extends Model
     public static function scopeDirectors(Builder $query): Builder
     {
         return $query->where('is_director', true);
+    }
+
+    public function isActor()
+    {
+        return $this->is_actor;
+    }
+
+    public function isDirector()
+    {
+        return $this->is_director;
+    }
+
+    public function countries(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Country::class,
+            UserCountry::class,
+            'user_id',
+        'country_id',
+            'id',
+            'id'
+        );
     }
 }

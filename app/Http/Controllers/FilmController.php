@@ -6,6 +6,7 @@ use App\Http\Requests\Film\SearchFilmsRequest;
 use App\Http\Requests\Film\StoreFilmRequest;
 use App\Http\Requests\Film\UpdateFilmRequest;
 use App\Models\Actor;
+use App\Models\Country;
 use App\Models\Director;
 use App\Models\Film;
 use App\Models\Genre;
@@ -15,7 +16,10 @@ class FilmController extends Controller
 {
     public function index(SearchFilmsRequest $request)
     {
-        $films = Film::with('actors', 'directors', 'genres')
+        $films = Film::with('actors')
+            ->with('genres')
+            ->with('directors')
+            ->with('countries')
             ->when($request->title, function ($query) use ($request) {
                 return $query->where('title', $request->title);
             })
@@ -37,6 +41,11 @@ class FilmController extends Controller
                     $query->whereIn('genres.id', $request->genres);
                 });
             })
+            ->when($request->countries, function ($query) use ($request) {
+                return $query->whereHas('countries', function ($query) use ($request) {
+                    $query->whereIn('countries.id', $request->countries);
+                });
+            })
             ->orderBy('title')
             ->orderBy('prod_year')
             ->get();
@@ -44,9 +53,11 @@ class FilmController extends Controller
         $actors = Actor::ordered()->get();
         $directors = Director::ordered()->get();
         $genres = Genre::ordered()->get();
+        $countries = Country::ordered()->get();
         $currentActors = $request->actors;
         $currentDirectors = $request->directors;
         $currentGenres = $request->genres;
+        $currentCountries = $request->countries;
 
         return view('film.index', compact(
             'films',
@@ -54,9 +65,11 @@ class FilmController extends Controller
             'actors',
             'directors',
             'genres',
+            'countries',
             'currentActors',
             'currentDirectors',
-            'currentGenres'
+            'currentGenres',
+            'currentCountries'
         ));
     }
 
@@ -65,7 +78,9 @@ class FilmController extends Controller
         $actors = Actor::ordered()->get();
         $directors = Director::ordered()->get();
         $genres = Genre::ordered()->get();
-        return view('film.create', compact('actors', 'directors', 'genres'));
+        $countries = Country::ordered()->get();
+
+        return view('film.create', compact('actors', 'directors', 'genres', 'countries'));
     }
 
     public function store(StoreFilmRequest $request)
@@ -79,6 +94,7 @@ class FilmController extends Controller
             $film->actors()->attach($request->actors);
             $film->directors()->attach($request->directors);
             $film->genres()->attach($request->genres);
+            $film->countries()->attach($request->countries);
         });
 
         return back();
@@ -86,12 +102,17 @@ class FilmController extends Controller
 
     public function show($id)
     {
-        $film = Film::with('actors', 'directors', 'genres')
+        $film = Film::with('actors')
+            ->with('directors')
+            ->with('genres')
+            ->with('countries')
             ->findOrFail($id);
         $actors = Actor::ordered()->get();
         $directors = Director::ordered()->get();
         $genres = Genre::ordered()->get();
-        return view('film.show', compact('film', 'actors', 'directors', 'genres'));
+        $countries = Country::ordered()->get();
+
+        return view('film.show', compact('film', 'actors', 'directors', 'genres', 'countries'));
     }
 
     public function update(UpdateFilmRequest $request, $id)
@@ -105,6 +126,7 @@ class FilmController extends Controller
             $film->actors()->sync($request->actors);
             $film->directors()->sync($request->directors);
             $film->genres()->sync($request->genres);
+            $film->countries()->sync($request->countries);
         });
 
         return back();
@@ -117,6 +139,7 @@ class FilmController extends Controller
             $film->genres()->detach();
             $film->actors()->detach();
             $film->directors()->detach();
+            $film->countries()->detach();
             $film->delete();
         });
         return redirect(route('films.index'));
