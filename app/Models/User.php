@@ -3,21 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\User
  *
  * @property int $id
  * @property string $title
- * @property bool $is_actor
- * @property bool $is_director
  * @property string|null $birth_date
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static Builder|User actors()
- * @method static Builder|User directors()
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|Country[] $countries
+ * @property-read int|null $countries_count
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User ordered()
@@ -25,8 +25,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static Builder|User whereBirthDate($value)
  * @method static Builder|User whereCreatedAt($value)
  * @method static Builder|User whereId($value)
- * @method static Builder|User whereIsActor($value)
- * @method static Builder|User whereIsDirector($value)
  * @method static Builder|User whereTitle($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -38,34 +36,12 @@ class User extends Model
 
     protected $fillable = [
         'title',
-        'is_actor',
-        'is_director',
         'birth_date'
     ];
 
     public function scopeOrdered(Builder $query): Builder
     {
         return $query->orderBy('title');
-    }
-
-    public static function scopeActors(Builder $query): Builder
-    {
-        return $query->where('is_actor', true);
-    }
-
-    public static function scopeDirectors(Builder $query): Builder
-    {
-        return $query->where('is_director', true);
-    }
-
-    public function isActor()
-    {
-        return $this->is_actor;
-    }
-
-    public function isDirector()
-    {
-        return $this->is_director;
     }
 
     public function countries(): BelongsToMany

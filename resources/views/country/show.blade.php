@@ -32,7 +32,7 @@
     </div>
     <div class="row mt-3">
         <div class="col-sm-12">
-            <b>Личности:</b>
+            <b>Люди:</b>
             @foreach($country->users as $user)
                 @include('components.links.user_link', compact('user'))
             @endforeach

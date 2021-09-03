@@ -1,5 +1,5 @@
 @include('components.selects.template', [
-    'label' => 'Личности',
+    'label' => 'Люди',
     'name' => 'users',
     'current' => $currentUsers ?? [],
     'elements' => $users,

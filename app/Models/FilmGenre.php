@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\FilmGenre
@@ -10,16 +12,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $film_id
  * @property int $genre_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|FilmGenre newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|FilmGenre newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|FilmGenre query()
- * @method static \Illuminate\Database\Eloquent\Builder|FilmGenre whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|FilmGenre whereFilmId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|FilmGenre whereGenreId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|FilmGenre whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|FilmGenre whereUpdatedAt($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|FilmGenre newModelQuery()
+ * @method static Builder|FilmGenre newQuery()
+ * @method static Builder|FilmGenre query()
+ * @method static Builder|FilmGenre whereCreatedAt($value)
+ * @method static Builder|FilmGenre whereFilmId($value)
+ * @method static Builder|FilmGenre whereGenreId($value)
+ * @method static Builder|FilmGenre whereId($value)
+ * @method static Builder|FilmGenre whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class FilmGenre extends Model

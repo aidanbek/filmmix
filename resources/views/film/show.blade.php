@@ -22,22 +22,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <b>Режиссеры:</b>
-            @foreach($film->directors as $director)
-                @include('components.links.director_link', compact('director'))
-            @endforeach
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <b>Актеры:</b>
-            @foreach($film->actors as $actor)
-                @include('components.links.actor_link', compact('actor'))
-            @endforeach
-        </div>
-    </div>
     <div class="row my-3">
         <div class="col-sm-12">
             <button type="button"
@@ -46,7 +30,7 @@
                     data-target="#edit_film">
                 Редактировать
             </button>
-            @if($film->actors->count() === 0 && $film->directors->count() === 0)
+            @if(true)
                 <button type="button"
                         class="btn btn-outline-danger btn-sm"
                         data-toggle="modal"
@@ -95,22 +79,6 @@
                                 <div class="col-sm-12">
                                     @php $currentGenres = $film->genres->pluck('id')->toArray(); @endphp
                                     @include('components.selects.genres', compact('genres', 'currentGenres'))
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    @php $currentDirectors = $film->directors->pluck('id')->toArray(); @endphp
-                                    @include('components.selects.directors', compact('directors', 'currentDirectors'))
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    @php $currentActors = $film->actors->pluck('id')->toArray(); @endphp
-                                    @include('components.selects.actors', compact('actors', 'currentActors'))
                                 </div>
                             </div>
                         </div>

@@ -39,10 +39,7 @@ class GenreController extends Controller
 
     public function show($id)
     {
-        $genre = Genre::with('films')
-            ->with('films.actors')
-            ->with('films.genres')
-            ->with('films.directors')
+        $genre = Genre::with('films.genres')
             ->with('films.countries')
             ->findOrFail($id);
         $films = Film::ordered()->get();

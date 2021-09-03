@@ -1,1 +1,4 @@
-<a class="text-decoration-none text-dark" href="{{route('genres.show', $genre->id)}}">{{$genre->title}}</a>
+@include('components.links.template', [
+    'route' => route('genres.show', $genre->id),
+    'title' => $genre->title
+])

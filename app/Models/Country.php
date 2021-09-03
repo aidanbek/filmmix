@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Country
@@ -12,15 +14,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int $id
  * @property string $title
  * @property string $code
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $actors
- * @property-read int|null $actors_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $directors
- * @property-read int|null $directors_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Film[] $films
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|Film[] $films
  * @property-read int|null $films_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @property-read Collection|User[] $users
  * @property-read int|null $users_count
  * @method static Builder|Country newModelQuery()
  * @method static Builder|Country newQuery()
@@ -52,15 +50,5 @@ class Country extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, UserCountry::class);
-    }
-
-    public function actors(): BelongsToMany
-    {
-        return $this->users()->actors();
-    }
-
-    public function directors(): BelongsToMany
-    {
-        return $this->users()->directors();
     }
 }

@@ -38,24 +38,6 @@
                                 </div>
                             </div>
                         @endif
-                        @if(count($directors) > 0)
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        @include('components.selects.directors', compact('directors'))
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                        @if(count($actors) > 0)
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        @include('components.selects.actors', compact('actors'))
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
                         @if(count($countries) > 0)
                             <div class="form-group">
                                 <div class="row">

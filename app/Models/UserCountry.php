@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\UserCountry
@@ -10,16 +12,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $user_id
  * @property int $country_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|UserCountry newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserCountry newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserCountry query()
- * @method static \Illuminate\Database\Eloquent\Builder|UserCountry whereCountryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserCountry whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserCountry whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserCountry whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserCountry whereUserId($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|UserCountry newModelQuery()
+ * @method static Builder|UserCountry newQuery()
+ * @method static Builder|UserCountry query()
+ * @method static Builder|UserCountry whereCountryId($value)
+ * @method static Builder|UserCountry whereCreatedAt($value)
+ * @method static Builder|UserCountry whereId($value)
+ * @method static Builder|UserCountry whereUpdatedAt($value)
+ * @method static Builder|UserCountry whereUserId($value)
  * @mixin \Eloquent
  */
 class UserCountry extends Model

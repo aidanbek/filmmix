@@ -1,6 +1,4 @@
-@if($user->isActor())
-    @include('components.links.actor_link', ['actor' => $user])
-@else
-    @include('components.links.director_link', ['director' => $user])
-@endif
-
+@include('components.links.template', [
+    'route' => route('users.show', $user->id),
+    'title' => $user->title
+])

@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::redirect('/', '/films', 301);
-Route::resource('films', 'FilmController');
-Route::resource('actors', 'ActorController');
-Route::resource('directors', 'DirectorController');
-Route::resource('genres', 'GenreController');
-Route::resource('countries', 'CountryController');
-Route::resource('imports', 'ImportController')->only(['index', 'store']);
+Route::resource('films', 'FilmController')->except(['edit']);
+Route::resource('users', 'UserController')->except(['edit']);
+Route::resource('professions', 'ProfessionController')->except(['edit']);
+Route::resource('genres', 'GenreController')->except(['edit']);
+Route::resource('countries', 'CountryController')->except(['edit']);

@@ -39,6 +39,6 @@ class CreateFilmCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('film_country');
+        Schema::dropIfExists('film_countries');
     }
 }

@@ -5,8 +5,6 @@
         <th>Год</th>
         <th>Страна</th>
         <th>Жанр</th>
-        <th>Режиссер</th>
-        <th>Актерский состав</th>
     </tr>
     </thead>
     <tbody>
@@ -22,16 +20,6 @@
             <td>
                 @foreach($film->genres as $genre)
                     @include('components.links.genre_link', compact('genre'))
-                @endforeach
-            </td>
-            <td>
-                @foreach($film->directors as $director)
-                    @include('components.links.director_link', compact('director'))
-                @endforeach
-            </td>
-            <td>
-                @foreach($film->actors as $actor)
-                    @include('components.links.actor_link', compact('actor'))
                 @endforeach
             </td>
         </tr>

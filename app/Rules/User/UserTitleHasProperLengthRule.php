@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Rules\Actor;
+namespace App\Rules\User;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class ActorTitleHasProperLengthRule implements Rule
+class UserTitleHasProperLengthRule implements Rule
 {
     /**
      * @var int
@@ -30,6 +30,6 @@ class ActorTitleHasProperLengthRule implements Rule
 
     public function message(): bool
     {
-        return "Имя актера содержит больше $this->length символов";
+        return "ФИО человека содержит больше $this->length символов";
     }
 }

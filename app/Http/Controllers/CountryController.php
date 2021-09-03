@@ -13,7 +13,7 @@ class CountryController extends Controller
 {
     public function index()
     {
-        $countries = Country::withCount('films', 'actors', 'directors')
+        $countries = Country::withCount('films')
             ->ordered()
             ->get();
 

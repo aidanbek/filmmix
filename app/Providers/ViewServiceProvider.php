@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\Actor;
 use App\Models\Country;
-use App\Models\Director;
 use App\Models\Film;
 use App\Models\Genre;
+use App\Models\Profession;
+use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,40 +34,40 @@ class ViewServiceProvider extends ServiceProvider
                     'icon' => 'bi bi-film'
                 ],
 
-                'Актеры' => [
-                    'matcher' => 'actors*',
-                    'count' => Actor::count(),
+                'Люди' => [
+                    'matcher' => 'users*',
+                    'count' => User::count(),
                     'links' => [
                         [
                             'title' => 'Добавить',
-                            'route' => 'actors.create',
+                            'route' => 'users.create',
                             'icon' => 'bi bi-person-plus'
                         ],
                         [
                             'title' => 'Список',
-                            'route' => 'actors.index',
+                            'route' => 'users.index',
                             'icon' => 'bi bi-card-list'
                         ]
                     ],
                     'icon' => 'bi bi-people'
                 ],
 
-                'Режиссеры' => [
-                    'matcher' => 'directors*',
-                    'count' => Director::count(),
+                'Профессии' => [
+                    'matcher' => 'professions*',
+                    'count' => Profession::count(),
                     'links' => [
                         [
                             'title' => 'Добавить',
-                            'route' => 'directors.create',
-                            'icon' => 'bi bi-person-plus'
+                            'route' => 'professions.create',
+                            'icon' => 'bi bi-file-earmark-plus'
                         ],
                         [
                             'title' => 'Список',
-                            'route' => 'directors.index',
-                            'icon' => 'bi bi-card-list'
+                            'route' => 'professions.index',
+                            'icon' => 'bi bi-file-earmark-person'
                         ]
                     ],
-                    'icon' => 'bi bi-people'
+                    'icon' => 'bi bi-file-earmark-person'
                 ],
 
                 'Жанры' => [
@@ -105,19 +105,6 @@ class ViewServiceProvider extends ServiceProvider
                     ],
                     'icon' => 'bi bi-flag'
                 ],
-
-                'Импорт' => [
-                    'matcher' => 'imports*',
-                    'count' => null,
-                    'links' => [
-                        [
-                            'title' => 'Импорт',
-                            'route' => 'imports.index'
-                        ]
-                    ],
-                    'icon' => 'bi bi-cloud-upload'
-                ],
-
             ];
             $view->with('navbarLinkGroups', $navbarLinkGroups);
         });

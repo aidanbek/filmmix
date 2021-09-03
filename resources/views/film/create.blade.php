@@ -29,20 +29,6 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
-                            @include('components.selects.directors', compact('directors'))
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            @include('components.selects.actors', compact('actors'))
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-12">
                             @include('components.selects.countries', compact('countries'))
                         </div>
                     </div>

@@ -1,24 +1,20 @@
 @extends('layouts.default')
-@section('title', 'Страны')
+@section('title', 'Профессии')
 
 @section('content')
-    @include('components.title_row', ['title' => 'Страны'])
+    @include('components.title_row', ['title' => 'Профессии'])
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover table-bordered datatable-table">
                 <thead>
                 <tr>
                     <th>Название</th>
-                    <th>Количество фильмов</th>
-                    <th>Количество людей</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($countries as $country)
+                @foreach($professions as $profession)
                     <tr>
-                        <td> @include('components.links.country_link', compact('country'))</td>
-                        <td>{{$country->films_count}}</td>
-                        <td>{{$country->users_count}}</td>
+                        <td> @include('components.links.profession_link', compact('profession'))</td>
                     </tr>
                 @endforeach
                 </tbody>

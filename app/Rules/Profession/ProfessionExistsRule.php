@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Rules\Actor;
+namespace App\Rules\Profession;
 
-use App\Models\Actor;
+use App\Models\Profession;
 use Illuminate\Contracts\Validation\Rule;
 
-class ActorExistsRule implements Rule
+class ProfessionExistsRule implements Rule
 {
     /**
      * @var string
@@ -22,7 +22,7 @@ class ActorExistsRule implements Rule
     public function passes($attribute, $value): bool
     {
         $this->id = $value;
-        return Actor::where('id', $value)->exists();
+        return Profession::where('id', $value)->exists();
     }
 
     public function message(): string
