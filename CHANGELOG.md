@@ -1,5 +1,14 @@
 # Release Notes
 
+## [0.5.0 (2021-09-04)](https://github.com/aidanbek/filmmix/compare/0.4.1...0.5.0)
+
+### Changed
+- Remove actors, directors
+- Pretty routes
+
+### Added
+- Profession
+
 ## [0.4.1 (2021-09-03)](https://github.com/aidanbek/filmmix/compare/0.4.0...0.4.1)
 
 ### Refactoring
