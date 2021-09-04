@@ -2,12 +2,14 @@
     <thead>
     <tr>
         <th>Название</th>
+        <th>Количество фильмов</th>
     </tr>
     </thead>
     <tbody>
-    @foreach($professions as $profession)
+    @foreach($genres as $genre)
         <tr>
-            <td>@include('components.links.profession_link', compact('profession'))</td>
+            <td> @include('components.links.genre_link', compact('genre'))</td>
+            <td>{{$genre->films_count}}</td>
         </tr>
     @endforeach
     </tbody>

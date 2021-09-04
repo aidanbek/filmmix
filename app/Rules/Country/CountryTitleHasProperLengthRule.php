@@ -30,6 +30,6 @@ class CountryTitleHasProperLengthRule implements Rule
 
     public function message(): bool
     {
-        return "Название содержит больше $this->length символов";
+        return "Название страны содержит больше $this->length символов";
     }
 }

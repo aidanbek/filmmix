@@ -1,5 +1,13 @@
 # Release Notes
 
+## [0.8.0 (2021-09-04)](https://github.com/aidanbek/filmmix/compare/0.7.0...0.8.0)
+
+### Refactor
+- Reduce duplicated components
+
+### Fixed
+- Typo in some rules
+
 ## [0.7.0 (2021-09-04)](https://github.com/aidanbek/filmmix/compare/0.6.0...0.7.0)
 
 ### Refactor

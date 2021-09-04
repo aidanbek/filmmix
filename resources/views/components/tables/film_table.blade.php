@@ -1,4 +1,4 @@
-<table class="table table-hover table-bordered datatable-table">
+<table class="table table-hover table-bordered datatable-table table-sm">
     <thead>
     <tr>
         <th>Название</th>

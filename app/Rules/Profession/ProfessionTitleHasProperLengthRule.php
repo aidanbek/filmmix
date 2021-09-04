@@ -30,6 +30,6 @@ class ProfessionTitleHasProperLengthRule implements Rule
 
     public function message(): bool
     {
-        return "ФИО человека содержит больше $this->length символов";
+        return "Название профессии содержит больше $this->length символов";
     }
 }
