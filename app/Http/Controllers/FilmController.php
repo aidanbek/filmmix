@@ -74,22 +74,18 @@ class FilmController extends Controller
         return back();
     }
 
-    public function show($id)
+    public function show(Film $film)
     {
-        $film = Film::with('genres')
-            ->with('countries')
-            ->findOrFail($id);
-
+        $film->load('genres','countries');
         $genres = Genre::ordered()->get();
         $countries = Country::ordered()->get();
 
         return view('film.show', compact('film',  'genres', 'countries'));
     }
 
-    public function update(UpdateFilmRequest $request, $id)
+    public function update(UpdateFilmRequest $request, Film $film)
     {
-        DB::transaction(function () use ($request, $id) {
-            $film = Film::findOrFail($id);
+        DB::transaction(function () use ($request, $film) {
             $film->title = $request->title;
             $film->prod_year = $request->prod_year;
             $film->save();
@@ -101,14 +97,14 @@ class FilmController extends Controller
         return back();
     }
 
-    public function destroy($id)
+    public function destroy(Film $film)
     {
-        $film = Film::findOrFail($id);
         DB::transaction(function () use ($film) {
             $film->genres()->detach();
             $film->countries()->detach();
             $film->delete();
         });
+
         return redirect(route('films.index'));
     }
 }

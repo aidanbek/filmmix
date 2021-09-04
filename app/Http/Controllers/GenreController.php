@@ -12,15 +12,15 @@ class GenreController extends Controller
 {
     public function index()
     {
-        $genres = Genre::withCount('films')
-            ->ordered()
-            ->get();
+        $genres = Genre::withCount('films')->ordered()->get();
+
         return view('genre.index', compact('genres'));
     }
 
     public function create()
     {
         $films = Film::ordered()->get();
+
         return view('genre.create', compact('films'));
     }
 
@@ -37,19 +37,17 @@ class GenreController extends Controller
         return back();
     }
 
-    public function show($id)
+    public function show(Genre $genre)
     {
-        $genre = Genre::with('films.genres')
-            ->with('films.countries')
-            ->findOrFail($id);
+        $genre->load('films.genres', 'films.countries');
         $films = Film::ordered()->get();
+
         return view('genre.show', compact('genre', 'films'));
     }
 
-    public function update(UpdateGenreRequest $request, $id)
+    public function update(UpdateGenreRequest $request, Genre $genre)
     {
-        DB::transaction(function () use ($request, $id) {
-            $genre = Genre::findOrFail($id);
+        DB::transaction(function () use ($request, $genre) {
             $genre->title = $request->title;
             $genre->save();
             $genre->films()->sync($request->films);
@@ -58,9 +56,9 @@ class GenreController extends Controller
         return back();
     }
 
-    public function destroy($id)
+    public function destroy(Genre $genre)
     {
-        Genre::findOrFail($id)->delete();
+        $genre->delete();
         return redirect(route('genres.index'));
     }
 }

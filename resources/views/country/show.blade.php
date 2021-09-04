@@ -118,25 +118,9 @@
         </div>
     </div>
 
-    <div class="modal fade" id="delete_country" tabindex="-1" role="dialog" aria-labelledby="delete_country_title"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete_country_title">Удаление</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{route('countries.destroy', $country->id)}}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <button type="submit" class="btn btn-danger">Удалить</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('components.modals.delete_modal', [
+        'modalId' => 'delete_country',
+        'modalTitle' => "Удалить страну '$country->title'",
+        'route' => route('countries.destroy', $country->id)
+    ])
 @endsection

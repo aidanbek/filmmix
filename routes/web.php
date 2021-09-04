@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::redirect('/', '/films', 301);
 Route::resource('films', 'FilmController')->except(['edit']);
-Route::resource('users', 'UserController')->except(['edit']);
-Route::resource('professions', 'ProfessionController')->except(['edit']);
+Route::resource('users', 'UserController');
+Route::resource('professions', 'ProfessionController');
 Route::resource('genres', 'GenreController')->except(['edit']);
 Route::resource('countries', 'CountryController')->except(['edit']);

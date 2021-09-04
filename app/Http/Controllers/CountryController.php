@@ -13,9 +13,7 @@ class CountryController extends Controller
 {
     public function index()
     {
-        $countries = Country::withCount('films')
-            ->ordered()
-            ->get();
+        $countries = Country::withCount('films')->ordered()->get();
 
         return view('country.index', compact('countries'));
     }
@@ -24,6 +22,7 @@ class CountryController extends Controller
     {
         $films = Film::ordered()->get();
         $users = User::ordered()->get();
+
         return view('country.create', compact('films', 'users'));
     }
 
@@ -42,20 +41,18 @@ class CountryController extends Controller
         return back();
     }
 
-    public function show($id)
+    public function show(Country $country)
     {
-        $country = Country::with('films', 'users')
-            ->findOrFail($id);
+        $country->load('films', 'users');
         $films = Film::ordered()->get();
         $users = User::ordered()->get();
 
         return view('country.show', compact('country', 'films', 'users'));
     }
 
-    public function update(UpdateCountryRequest $request, $id)
+    public function update(UpdateCountryRequest $request, Country $country)
     {
-        DB::transaction(function () use ($request, $id) {
-            $country = Country::findOrFail($id);
+        DB::transaction(function () use ($request, $country) {
             $country->title = $request->title;
             $country->code = $request->code;
             $country->save();
@@ -67,9 +64,9 @@ class CountryController extends Controller
         return back();
     }
 
-    public function destroy($id)
+    public function destroy(Country $country)
     {
-        Country::findOrFail($id)->delete();
+        $country->delete();
         return redirect(route('countries.index'));
     }
 }

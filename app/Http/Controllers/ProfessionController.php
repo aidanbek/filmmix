@@ -5,20 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Profession\StoreProfessionRequest;
 use App\Http\Requests\Profession\UpdateProfessionRequest;
 use App\Models\Profession;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class ProfessionController extends Controller
 {
     public function index()
     {
-        $professions = Profession::ordered()
-            ->get();
+        $professions = Profession::ordered()->get();
+
         return view('profession.index', compact('professions'));
     }
 
     public function create()
     {
-        return view('profession.create');
+        $users = User::ordered()->get();
+
+        return view('profession.create', compact('users'));
     }
 
     public function store(StoreProfessionRequest $request)
@@ -27,32 +30,43 @@ class ProfessionController extends Controller
             $profession = new Profession();
             $profession->title = $request->title;
             $profession->save();
+
+            $profession->users()->attach($request->users);
         });
 
         return back();
     }
 
-    public function show($id)
+    public function show(Profession $profession)
     {
-        $profession = Profession::findOrFail($id);
+        $profession->load('users');
 
         return view('profession.show', compact('profession'));
     }
 
-    public function update(UpdateProfessionRequest $request, $id)
+    public function edit(Profession $profession)
     {
-        DB::transaction(function () use ($request, $id) {
-            $profession = Profession::findOrFail($id);
-            $profession->title = $request->title;
-            $profession->save();
-        });
+        $profession->load('users');
+        $users = User::ordered()->get();
 
-        return back();
+        return view('profession.edit', compact('profession', 'users'));
     }
 
-    public function destroy($id)
+    public function update(UpdateProfessionRequest $request, Profession $profession)
     {
-        Profession::findOrFail($id)->delete();
+        DB::transaction(function () use ($request, $profession) {
+            $profession->title = $request->title;
+            $profession->save();
+
+            $profession->users()->sync($request->users);
+        });
+
+        return redirect(route('professions.show', $profession->id));
+    }
+
+    public function destroy(Profession $profession)
+    {
+        $profession->delete();
         return redirect(route('professions.index'));
     }
 }

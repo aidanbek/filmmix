@@ -7,11 +7,19 @@
         <div class="col-md-12">
             <form action="{{route('professions.store')}}" method="POST">
                 @csrf
+                @method('POST')
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="title">Название</label>
                             <input type="text" class="form-control" name="title" id="title">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @include('components.selects.users', compact('users'))
                         </div>
                     </div>
                 </div>

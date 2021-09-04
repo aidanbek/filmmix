@@ -1,5 +1,14 @@
 # Release Notes
 
+## [0.6.0 (2021-09-04)](https://github.com/aidanbek/filmmix/compare/0.5.0...0.6.0)
+
+### Refactor
+- Delete modals made from template 
+
+### Added
+- Professions to users
+- Partially add route model bindings
+
 ## [0.5.0 (2021-09-04)](https://github.com/aidanbek/filmmix/compare/0.4.1...0.5.0)
 
 ### Changed

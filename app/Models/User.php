@@ -18,6 +18,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Collection|Country[] $countries
  * @property-read int|null $countries_count
+ * @property-read Collection|Profession[] $professions
+ * @property-read int|null $professions_count
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User ordered()
@@ -54,5 +56,17 @@ class User extends Model
             'id',
             'id'
         );
+    }
+
+    public function professions(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Profession::class,
+            UserProfession::class,
+            'user_id',
+            'profession_id',
+            'id',
+            'id'
+        )->orderBy('professions.title');
     }
 }

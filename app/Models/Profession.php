@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -13,6 +15,8 @@ use Illuminate\Support\Carbon;
  * @property string $title
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read Collection|User[] $users
+ * @property-read int|null $users_count
  * @method static Builder|Profession newModelQuery()
  * @method static Builder|Profession newQuery()
  * @method static Builder|Profession ordered()
@@ -32,5 +36,11 @@ class Profession extends Model
     public function scopeOrdered(Builder $query): Builder
     {
         return $query->orderBy('title');
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, UserProfession::class)
+            ->orderBy('users.title');
     }
 }

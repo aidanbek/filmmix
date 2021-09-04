@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use App\Rules\Profession\ProfessionExistsRule;
 use App\Rules\User\UserTitleHasProperLengthRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -10,6 +11,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @package App\Http\Requests\User
  * @property string $title
  * @property string[] $films
+ * @property string[] $professions
  */
 class UpdateUserRequest extends FormRequest
 {
@@ -21,7 +23,9 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['bail', 'required', 'string', new UserTitleHasProperLengthRule()]
+            'title' => ['bail', 'required', 'string', new UserTitleHasProperLengthRule()],
+            'professions' => ['nullable', 'array'],
+            'professions.*' => ['bail', 'required', 'integer', new ProfessionExistsRule()]
         ];
     }
 }
