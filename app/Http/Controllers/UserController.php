@@ -62,7 +62,12 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $user->delete();
+        DB::transaction(function () use ($user) {
+            $user->countries()->detach();
+            $user->professions()->detach();
+            $user->delete();
+        });
+
         return redirect(route('users.index'));
     }
 }

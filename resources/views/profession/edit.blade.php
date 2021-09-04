@@ -1,8 +1,8 @@
 @extends('layouts.default')
-@section('title', 'Редактирование '. $profession->title)
+@section('title', "Редактирование профессии '$profession->title'")
 
 @section('content')
-    @include('components.title_row', ['title' => 'Редактирование '.$profession->title])
+    @include('components.title_row', ['title' => "Редактирование профессии '$profession->title'"])
     <div class="row">
         <div class="col-md-12">
             <form action="{{route('professions.update', $profession->id)}}" method="POST">
@@ -11,8 +11,12 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="title">Название</label>
-                            <input type="text" class="form-control" name="title" id="title" value="{{$profession->title}}">
+                            <label for="title">Название профессии</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="title"
+                                   id="title"
+                                   value="{{$profession->title}}">
                         </div>
                     </div>
                 </div>

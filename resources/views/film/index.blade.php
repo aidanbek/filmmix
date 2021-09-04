@@ -63,7 +63,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @include('components.film_table', compact('films'))
+                    @include('components.tables.film_table', compact('films'))
                 </div>
             </div>
         </div>

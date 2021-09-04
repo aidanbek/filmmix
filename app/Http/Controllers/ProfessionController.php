@@ -66,7 +66,10 @@ class ProfessionController extends Controller
 
     public function destroy(Profession $profession)
     {
-        $profession->delete();
+        DB::transaction(function () use ($profession) {
+            $profession->users()->detach();
+            $profession->delete();
+        });
         return redirect(route('professions.index'));
     }
 }

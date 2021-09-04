@@ -1,76 +1,23 @@
 @extends('layouts.default')
-@section('title', $genre->title)
+@section('title', "Жанр '$genre->title'")
 
 @section('content')
-    @include('components.title_row', ['title' => $genre->title])
+    @include('components.title_row', ['title' => "Жанр '$genre->title'"])
     <div class="row">
         <div class="col-sm-12">
-            @include('components.film_table', ['films' => $genre->films])
+            @include('components.tables.film_table', ['films' => $genre->films])
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-sm-12">
-            <button type="button"
-                    class="btn btn-outline-primary btn-sm"
-                    data-toggle="modal"
-                    data-target="#edit_genre">
-                Редактировать
-            </button>
-            @if($genre->films->count() === 0)
-                <button type="button"
-                        class="btn btn-outline-danger btn-sm"
-                        data-toggle="modal"
-                        data-target="#delete_genre">Удалить
-                </button>
-            @endif
+            @include('components.buttons.edit_button', ['route' => route('genres.edit', $genre->id)])
+            @include('components.buttons.delete_button', ['modalId' => 'delete_genre'])
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
             @include('components.timestamps', ['element' => $genre])
-        </div>
-    </div>
-
-    <div class="modal fade" id="edit_genre" tabindex="-1" role="dialog" aria-labelledby="edit_genre_title"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="edit_genre_title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{route('genres.update', $genre->id)}}" method="POST">
-                        @method('PATCH')
-                        @csrf
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label for="title">Имя</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           name="title"
-                                           id="title"
-                                           value="{{$genre->title}}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    @php $currentFilms = $genre->films->pluck('id')->toArray(); @endphp
-                                    @include('components.selects.films', compact('films', 'currentFilms'))
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 

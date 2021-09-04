@@ -40,9 +40,16 @@ class GenreController extends Controller
     public function show(Genre $genre)
     {
         $genre->load('films.genres', 'films.countries');
+
+        return view('genre.show', compact('genre'));
+    }
+
+    public function edit(Genre $genre)
+    {
+        $genre->load('films.genres', 'films.countries');
         $films = Film::ordered()->get();
 
-        return view('genre.show', compact('genre', 'films'));
+        return view('genre.edit', compact('genre', 'films'));
     }
 
     public function update(UpdateGenreRequest $request, Genre $genre)
@@ -53,7 +60,7 @@ class GenreController extends Controller
             $genre->films()->sync($request->films);
         });
 
-        return back();
+        return redirect(route('genres.show', $genre->id));
     }
 
     public function destroy(Genre $genre)

@@ -1,5 +1,12 @@
 # Release Notes
 
+## [0.7.0 (2021-09-04)](https://github.com/aidanbek/filmmix/compare/0.6.0...0.7.0)
+
+### Refactor
+- Reduce duplicated components
+- Refactor model deleting
+- Add views for editing models
+
 ## [0.6.0 (2021-09-04)](https://github.com/aidanbek/filmmix/compare/0.5.0...0.6.0)
 
 ### Refactor

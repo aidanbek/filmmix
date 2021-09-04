@@ -1,5 +1,4 @@
 <table class="table table-hover table-bordered datatable-table">
-    <caption>Люди</caption>
     <thead>
     <tr>
         <th>ФИО</th>

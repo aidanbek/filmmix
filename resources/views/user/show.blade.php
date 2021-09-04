@@ -5,24 +5,14 @@
     @include('components.title_row', ['title' => $user->title])
     <div class="row mb-3">
         <div class="col-sm-12">
-            <a type="button"
-               class="btn btn-outline-primary btn-sm"
-               href="{{route('users.edit', $user->id)}}">
-                Редактировать
-            </a>
-            @if(true)
-                <button type="button"
-                        class="btn btn-outline-danger btn-sm"
-                        data-toggle="modal"
-                        data-target="#delete_user">Удалить
-                </button>
-            @endif
+            @include('components.buttons.edit_button', ['route' => route('users.edit', $user->id)])
+            @include('components.buttons.delete_button', ['modalId' => 'delete_user'])
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
-            @include('components.professions_table', ['professions' => $user->professions])
+            @include('components.tables.professions_table', ['professions' => $user->professions])
         </div>
     </div>
 

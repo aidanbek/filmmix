@@ -44,10 +44,17 @@ class CountryController extends Controller
     public function show(Country $country)
     {
         $country->load('films', 'users');
+
+        return view('country.show', compact('country'));
+    }
+
+    public function edit(Country $country)
+    {
+        $country->load('films', 'users');
         $films = Film::ordered()->get();
         $users = User::ordered()->get();
 
-        return view('country.show', compact('country', 'films', 'users'));
+        return view('country.edit', compact('country', 'films', 'users'));
     }
 
     public function update(UpdateCountryRequest $request, Country $country)
@@ -61,12 +68,17 @@ class CountryController extends Controller
             $country->users()->sync($request->users);
         });
 
-        return back();
+        return redirect(route('countries.show', $country->id));
     }
 
     public function destroy(Country $country)
     {
-        $country->delete();
+        DB::transaction(function () use ($country) {
+            $country->users()->detach();
+            $country->films()->detach();
+            $country->delete();
+        });
+
         return redirect(route('countries.index'));
     }
 }

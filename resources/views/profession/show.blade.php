@@ -1,28 +1,18 @@
 @extends('layouts.default')
-@section('title', $profession->title)
+@section('title', "Профессия '$profession->title'")
 
 @section('content')
-    @include('components.title_row', ['title' => $profession->title])
+    @include('components.title_row', ['title' => "Профессия '$profession->title'"])
     <div class="row mb-3">
         <div class="col-sm-12">
-            <a type="button"
-               class="btn btn-outline-primary btn-sm"
-               href="{{route('professions.edit', $profession->id)}}">
-                Редактировать
-            </a>
-            @if(true)
-                <button type="button"
-                        class="btn btn-outline-danger btn-sm"
-                        data-toggle="modal"
-                        data-target="#delete_profession">Удалить
-                </button>
-            @endif
+            @include('components.buttons.edit_button', ['route' => route('professions.edit', $profession->id)])
+            @include('components.buttons.delete_button', ['modalId' => 'delete_profession'])
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
-            @include('components.users_table', ['users' => $profession->users])
+            @include('components.tables.users_table', ['users' => $profession->users])
         </div>
     </div>
 

@@ -1,30 +1,30 @@
 @extends('layouts.default')
-@section('title', "Редактирование '$user->title'")
+@section('title', "Редактирование жанра '$genre->title'")
 
 @section('content')
-    @include('components.title_row', ['title' => "Редактирование '$user->title'"])
+    @include('components.title_row', ['title' => "Редактирование жанра '$genre->title'"])
     <div class="row">
         <div class="col-md-12">
-            <form action="{{route('users.update', $user->id)}}" method="POST">
+            <form action="{{route('genres.update', $genre->id)}}" method="POST">
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="title">ФИО</label>
+                            <label for="title">Название</label>
                             <input type="text"
                                    class="form-control"
                                    name="title"
                                    id="title"
-                                   value="{{$user->title}}">
+                                   value="{{$genre->title}}">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
-                            @php $currentProfessions = $user->professions->pluck('id')->toArray(); @endphp
-                            @include('components.selects.professions', compact('professions', 'currentProfessions'))
+                            @php $currentFilms = $genre->films->pluck('id')->toArray(); @endphp
+                            @include('components.selects.films', compact('films'))
                         </div>
                     </div>
                 </div>

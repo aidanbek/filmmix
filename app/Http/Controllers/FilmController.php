@@ -76,11 +76,18 @@ class FilmController extends Controller
 
     public function show(Film $film)
     {
-        $film->load('genres','countries');
+        $film->load('genres', 'countries');
+
+        return view('film.show', compact('film'));
+    }
+
+    public function edit(Film $film)
+    {
+        $film->load('genres', 'countries');
         $genres = Genre::ordered()->get();
         $countries = Country::ordered()->get();
 
-        return view('film.show', compact('film',  'genres', 'countries'));
+        return view('film.edit', compact('film', 'genres', 'countries'));
     }
 
     public function update(UpdateFilmRequest $request, Film $film)
@@ -94,7 +101,7 @@ class FilmController extends Controller
             $film->countries()->sync($request->countries);
         });
 
-        return back();
+        return redirect(route('films.show', $film->id));
     }
 
     public function destroy(Film $film)
