@@ -18,3 +18,4 @@ Route::resource('users', 'UserController');
 Route::resource('professions', 'ProfessionController');
 Route::resource('genres', 'GenreController');
 Route::resource('countries', 'CountryController');
+Route::resource('taglines', 'TaglineController');

@@ -31,7 +31,9 @@ class Genre extends Model
 {
     protected $table = 'genres';
     protected $primaryKey = 'id';
-    protected $fillable = ['title'];
+    protected $fillable = [
+        'title'
+    ];
 
     public function scopeOrdered(Builder $query): Builder
     {
@@ -40,6 +42,6 @@ class Genre extends Model
 
     public function films(): BelongsToMany
     {
-        return $this->belongsToMany(Film::class, FilmGenre::class);
+        return $this->belongsToMany(Film::class, FilmGenre::class)->ordered();
     }
 }

@@ -1,3 +1,6 @@
+@php /** @var App\Models\Film[] $films */ @endphp
+@php /** @var App\Models\Genre $genre */ @endphp
+
 @extends('layouts.default')
 @section('title', "Редактирование жанра '$genre->title'")
 
@@ -24,7 +27,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             @php $currentFilms = $genre->films->pluck('id')->toArray(); @endphp
-                            @include('components.selects.films', compact('films'))
+                            @include('components.selects.films', compact('films', 'currentFilms'))
                         </div>
                     </div>
                 </div>

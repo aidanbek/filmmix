@@ -31,7 +31,9 @@ class Profession extends Model
 {
     protected $table = 'professions';
     protected $primaryKey = 'id';
-    protected $fillable = ['title'];
+    protected $fillable = [
+        'title'
+    ];
 
     public function scopeOrdered(Builder $query): Builder
     {
@@ -40,7 +42,6 @@ class Profession extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, UserProfession::class)
-            ->orderBy('users.title');
+        return $this->belongsToMany(User::class, UserProfession::class)->ordered();
     }
 }

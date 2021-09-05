@@ -1,3 +1,5 @@
+@php /** @var App\Models\Profession $profession */ @endphp
+
 @extends('layouts.default')
 @section('title', "Профессия '$profession->title'")
 

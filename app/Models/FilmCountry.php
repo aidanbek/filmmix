@@ -27,5 +27,8 @@ use Illuminate\Support\Carbon;
 class FilmCountry extends Model
 {
     protected $table = 'film_countries';
-    protected $fillable = ['film_id', 'country_id'];
+    protected $fillable = [
+        'film_id',
+        'country_id'
+    ];
 }

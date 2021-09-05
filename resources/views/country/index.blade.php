@@ -1,3 +1,5 @@
+@php /** @var App\Models\Country[] $countries */ @endphp
+
 @extends('layouts.default')
 @section('title', 'Страны')
 

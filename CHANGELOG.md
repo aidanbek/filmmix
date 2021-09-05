@@ -1,5 +1,14 @@
 # Release Notes
 
+## [0.9.0 (2021-09-06)](https://github.com/aidanbek/filmmix/compare/0.8.0...0.9.0)
+
+### Added
+- Taglines to film
+
+### Refactor
+- Add phpDoc to blade views
+- Add ordering to relations
+
 ## [0.8.0 (2021-09-04)](https://github.com/aidanbek/filmmix/compare/0.7.0...0.8.0)
 
 ### Refactor

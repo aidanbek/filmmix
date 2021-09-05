@@ -27,5 +27,8 @@ use Illuminate\Support\Carbon;
 class UserCountry extends Model
 {
     protected $table = 'user_countries';
-    protected $fillable = ['user_id', 'country_id'];
+    protected $fillable = [
+        'user_id',
+        'country_id'
+    ];
 }

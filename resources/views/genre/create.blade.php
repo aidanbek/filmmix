@@ -1,3 +1,5 @@
+@php /** @var App\Models\Film[] $films */ @endphp
+
 @extends('layouts.default')
 @section('title', 'Добавить жанр')
 

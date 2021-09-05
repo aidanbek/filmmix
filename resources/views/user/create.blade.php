@@ -1,3 +1,5 @@
+@php /** @var App\Models\Profession[] $professions */ @endphp
+
 @extends('layouts.default')
 @section('title', 'Добавить человека')
 

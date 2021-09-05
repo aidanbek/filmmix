@@ -1,3 +1,6 @@
+@php /** @var App\Models\Genre[] $genres */ @endphp
+@php /** @var App\Models\Film $film */ @endphp
+
 @extends('layouts.default')
 @section('title', "Редактированиеа фильм '$film->title' ($film->prod_year)")
 

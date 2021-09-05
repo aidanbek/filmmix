@@ -76,7 +76,7 @@ class FilmController extends Controller
 
     public function show(Film $film)
     {
-        $film->load('genres', 'countries');
+        $film->load('genres', 'countries', 'taglines');
 
         return view('film.show', compact('film'));
     }

@@ -1,3 +1,5 @@
+@php /** @var App\Models\Country $country */ @endphp
+
 @extends('layouts.default')
 @section('title', "Редактирование страны '$country->title'")
 

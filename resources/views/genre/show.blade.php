@@ -1,3 +1,5 @@
+@php /** @var App\Models\Genre $genre */ @endphp
+
 @extends('layouts.default')
 @section('title', "Жанр '$genre->title'")
 

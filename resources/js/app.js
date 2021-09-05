@@ -3,7 +3,7 @@ require('./bootstrap');
 $(document).ready(function () {
     $('.selectpicker').selectpicker({
         liveSearch: true,
-        noneSelectedText: 'Ничего не найдено',
+        noneSelectedText: 'Ничего не выбрано',
         noneResultsText: 'Нет совпадений',
         actionsBox: true,
         selectAllText: 'Выбрать все',

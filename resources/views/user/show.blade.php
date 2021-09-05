@@ -1,3 +1,5 @@
+@php /** @var App\Models\User $user */ @endphp
+
 @extends('layouts.default')
 @section('title', $user->title)
 

@@ -1,3 +1,5 @@
+@php /** @var App\Models\Film[] $films */ @endphp
+
 <table class="table table-hover table-bordered datatable-table table-sm">
     <thead>
     <tr>

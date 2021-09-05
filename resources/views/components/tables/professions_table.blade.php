@@ -1,3 +1,5 @@
+@php /** @var App\Models\Profession[] $professions */ @endphp
+
 <table class="table table-hover table-bordered datatable-table table-sm">
     <thead>
     <tr>

@@ -1,3 +1,6 @@
+@php /** @var App\Models\User $user */ @endphp
+@php /** @var App\Models\Profession[] $professions */ @endphp
+
 @extends('layouts.default')
 @section('title', "Редактирование '$user->title'")
 

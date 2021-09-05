@@ -1,6 +1,9 @@
+@php /** @var App\Http\Requests\Film\SearchFilmsRequest $request */ @endphp
+@php /** @var App\Models\Genre[] $genres */ @endphp
+@php /** @var App\Models\Country[] $countries */ @endphp
+
 @extends('layouts.default')
 @section('title', 'Фильмы')
-
 
 @section('content')
     @include('components.title_row', ['title' => 'Фильмы'])

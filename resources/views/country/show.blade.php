@@ -1,3 +1,5 @@
+@php /** @var App\Models\Country $country */ @endphp
+
 @extends('layouts.default')
 @section('title', "Страна '$country->title'")
 
@@ -11,7 +13,7 @@
                         <div class="col-sm-3">
                             <label for="">Код страны</label>
                             <input type="text"
-                                   class="form-control-plaintext"
+                                   class="form-control"
                                    readonly
                                    value="{{$country->code}}">
                         </div>
@@ -42,7 +44,7 @@
     <div class="row my-3">
         <div class="col-sm-12">
             @include('components.buttons.edit_button', ['route' => route('countries.edit', $country->id)])
-            @include('components.buttons.delete_button', ['modalId' => 'delete_film'])
+            @include('components.buttons.delete_button', ['modalId' => 'delete_country'])
         </div>
     </div>
 

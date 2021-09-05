@@ -35,7 +35,6 @@ class User extends Model
 {
     protected $table = 'users';
     protected $primaryKey = 'id';
-
     protected $fillable = [
         'title',
         'birth_date'
@@ -55,7 +54,7 @@ class User extends Model
         'country_id',
             'id',
             'id'
-        );
+        )->ordered();
     }
 
     public function professions(): BelongsToMany
@@ -67,6 +66,6 @@ class User extends Model
             'profession_id',
             'id',
             'id'
-        )->orderBy('professions.title');
+        )->ordered();
     }
 }

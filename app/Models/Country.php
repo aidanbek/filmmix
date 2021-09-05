@@ -35,7 +35,10 @@ class Country extends Model
 {
     protected $table = 'countries';
     protected $primaryKey = 'id';
-    protected $fillable = ['title', 'code'];
+    protected $fillable = [
+        'title',
+        'code'
+    ];
 
     public function scopeOrdered(Builder $query): Builder
     {
@@ -44,11 +47,11 @@ class Country extends Model
 
     public function films(): BelongsToMany
     {
-        return $this->belongsToMany(Film::class, FilmCountry::class);
+        return $this->belongsToMany(Film::class, FilmCountry::class)->ordered();
     }
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, UserCountry::class);
+        return $this->belongsToMany(User::class, UserCountry::class)->ordered();
     }
 }

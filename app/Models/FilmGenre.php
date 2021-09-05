@@ -27,5 +27,8 @@ use Illuminate\Support\Carbon;
 class FilmGenre extends Model
 {
     protected $table = 'film_genres';
-    protected $fillable = ['film_d', 'genre_id'];
+    protected $fillable = [
+        'film_d',
+        'genre_id'
+    ];
 }

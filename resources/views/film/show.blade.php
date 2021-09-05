@@ -1,3 +1,5 @@
+@php /** @var App\Models\Film $film */ @endphp
+
 @extends('layouts.default')
 @section('title', "Фильмы '$film->title' ($film->prod_year)")
 
@@ -22,6 +24,14 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Слоганы</h2>
+            @include('components.tables.taglines_table', ['taglines' => $film->taglines])
+        </div>
+    </div>
+
     <div class="row my-3">
         <div class="col-sm-12">
             @include('components.buttons.edit_button', ['route' => route('films.edit', $film->id)])

@@ -20,6 +20,8 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $countries_count
  * @property-read Collection|Genre[] $genres
  * @property-read int|null $genres_count
+ * @property-read Collection|Tagline[] $taglines
+ * @property-read int|null $taglines_count
  * @method static Builder|Film newModelQuery()
  * @method static Builder|Film newQuery()
  * @method static Builder|Film ordered()
@@ -35,7 +37,10 @@ class Film extends Model
 {
     protected $table = 'films';
     protected $primaryKey = 'id';
-    protected $fillable = ['title', 'prod_year'];
+    protected $fillable = [
+        'title',
+        'prod_year'
+    ];
 
     public function scopeOrdered(Builder $query): Builder
     {
@@ -44,11 +49,16 @@ class Film extends Model
 
     public function genres(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class, FilmGenre::class);
+        return $this->belongsToMany(Genre::class, FilmGenre::class)->ordered();
     }
 
     public function countries(): BelongsToMany
     {
-        return $this->belongsToMany(Country::class, FilmCountry::class);
+        return $this->belongsToMany(Country::class, FilmCountry::class)->ordered();
+    }
+
+    public function taglines(): BelongsToMany
+    {
+        return $this->belongsToMany(Tagline::class, FilmTagline::class)->ordered();
     }
 }

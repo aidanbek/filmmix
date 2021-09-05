@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\Film;
 use App\Models\Genre;
 use App\Models\Profession;
+use App\Models\Tagline;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -104,6 +105,24 @@ class ViewServiceProvider extends ServiceProvider
                         ]
                     ],
                     'icon' => 'bi bi-flag'
+                ],
+
+                'Слоганы' => [
+                    'matcher' => 'taglines*',
+                    'count' => Tagline::count(),
+                    'links' => [
+                        [
+                            'title' => 'Добавить',
+                            'route' => 'taglines.create',
+                            'icon' => 'bi bi-tag'
+                        ],
+                        [
+                            'title' => 'Список',
+                            'route' => 'taglines.index',
+                            'icon' => 'bi bi-tags'
+                        ]
+                    ],
+                    'icon' => 'bi bi-tags'
                 ],
             ];
             $view->with('navbarLinkGroups', $navbarLinkGroups);

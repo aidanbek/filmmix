@@ -1,4 +1,6 @@
-<table class="table table-hover table-bordered datatable-table">
+@php /** @var App\Models\Country[] $countries */ @endphp
+
+<table class="table table-hover table-bordered datatable-table table-sm">
     <thead>
     <tr>
         <th>Название</th>
@@ -9,7 +11,7 @@
     <tbody>
     @foreach($countries as $country)
         <tr>
-            <td> @include('components.links.country_link', compact('country'))</td>
+            <td>@include('components.links.country_link', compact('country'))</td>
             <td>{{$country->films_count}}</td>
             <td>{{$country->users_count}}</td>
         </tr>

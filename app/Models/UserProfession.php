@@ -27,5 +27,8 @@ use Illuminate\Support\Carbon;
 class UserProfession extends Model
 {
     protected $table = 'user_professions';
-    protected $fillable = ['user_id', 'profession_id'];
+    protected $fillable = [
+        'user_id',
+        'profession_id'
+    ];
 }
