@@ -1,5 +1,10 @@
 # Release Notes
 
+## [0.9.1 (2021-10-23)](https://github.com/aidanbek/filmmix/compare/0.9.0...0.9.1)
+
+### Fixed
+- Rename the table "film_countries" to "film_origin_countries"
+
 ## [0.9.0 (2021-09-06)](https://github.com/aidanbek/filmmix/compare/0.8.0...0.9.0)
 
 ### Added

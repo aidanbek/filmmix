@@ -54,7 +54,7 @@ class Film extends Model
 
     public function countries(): BelongsToMany
     {
-        return $this->belongsToMany(Country::class, FilmCountry::class)->ordered();
+        return $this->belongsToMany(Country::class, FilmOriginCountry::class)->ordered();
     }
 
     public function taglines(): BelongsToMany

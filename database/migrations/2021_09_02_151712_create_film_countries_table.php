@@ -13,7 +13,7 @@ class CreateFilmCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('film_countries', function (Blueprint $table) {
+        Schema::create('film_origin_countries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('film_id')->index();
             $table->unsignedBigInteger('country_id')->index();
@@ -39,6 +39,6 @@ class CreateFilmCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('film_countries');
+        Schema::dropIfExists('film_origin_countries');
     }
 }

@@ -47,7 +47,7 @@ class Country extends Model
 
     public function films(): BelongsToMany
     {
-        return $this->belongsToMany(Film::class, FilmCountry::class)->ordered();
+        return $this->belongsToMany(Film::class, FilmOriginCountry::class)->ordered();
     }
 
     public function users(): BelongsToMany
