@@ -1,5 +1,11 @@
 # Release Notes
 
+## [0.10.0 (2021-10-24)](https://github.com/aidanbek/filmmix/compare/0.9.2...0.10.0)
+
+### Changed
+- Upgrade using php version up to 8.x in composer.json
+- Update composer dependencies
+
 ## [0.9.2 (2021-10-24)](https://github.com/aidanbek/filmmix/compare/0.9.1...0.9.2)
 
 ### Added
