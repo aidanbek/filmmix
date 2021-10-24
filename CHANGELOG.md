@@ -1,5 +1,10 @@
 # Release Notes
 
+## [0.9.2 (2021-10-24)](https://github.com/aidanbek/filmmix/compare/0.9.1...0.9.2)
+
+### Added
+- DB seeder for professions and genres
+
 ## [0.9.1 (2021-10-23)](https://github.com/aidanbek/filmmix/compare/0.9.0...0.9.1)
 
 ### Fixed
