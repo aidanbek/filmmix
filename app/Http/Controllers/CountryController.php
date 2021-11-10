@@ -31,7 +31,6 @@ class CountryController extends Controller
         DB::transaction(function () use ($request) {
             $country = new Country();
             $country->title = $request->title;
-            $country->code = $request->code;
             $country->save();
 
             $country->films()->attach($request->films);
@@ -61,7 +60,6 @@ class CountryController extends Controller
     {
         DB::transaction(function () use ($request, $country) {
             $country->title = $request->title;
-            $country->code = $request->code;
             $country->save();
 
             $country->films()->sync($request->films);

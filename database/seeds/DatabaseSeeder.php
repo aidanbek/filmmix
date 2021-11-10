@@ -11,8 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this
-             ->call(ProfessionSeeder::class)
-             ->call(GenreSeeder::class);
+        $this
+            ->call(ProfessionSeeder::class)
+            ->call(GenreSeeder::class)
+            ->call(CountrySeeder::class);
     }
 }

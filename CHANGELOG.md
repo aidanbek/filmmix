@@ -1,5 +1,14 @@
 # Release Notes
 
+## [0.10.3 (2021-11-11)](https://github.com/aidanbek/filmmix/compare/0.10.2...0.10.3)
+
+### Added
+- DB seeders for countries
+
+### Changed
+- Update seeders
+- Remove "code" field from Country
+
 ## [0.10.2 (2021-11-10)](https://github.com/aidanbek/filmmix/compare/0.10.1...0.10.2)
 
 ### Added

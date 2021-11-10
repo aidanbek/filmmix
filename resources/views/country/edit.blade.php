@@ -12,7 +12,7 @@
                 @method('PATCH')
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
                             <label for="title">Название страны</label>
                             <input type="text"
                                    class="form-control"
@@ -20,14 +20,7 @@
                                    id="title"
                                    value="{{$country->title}}">
                         </div>
-                        <div class="col-sm-4">
-                            <label for="title">Код страны</label>
-                            <input type="text"
-                                   class="form-control"
-                                   name="code"
-                                   id="code"
-                                   value="{{$country->code}}">
-                        </div>
+
                     </div>
                 </div>
                 <div class="form-group">

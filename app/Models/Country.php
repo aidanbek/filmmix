@@ -13,7 +13,6 @@ use Illuminate\Support\Carbon;
  *
  * @property int $id
  * @property string $title
- * @property string $code
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|Film[] $films
@@ -24,7 +23,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Country newQuery()
  * @method static Builder|Country ordered()
  * @method static Builder|Country query()
- * @method static Builder|Country whereCode($value)
  * @method static Builder|Country whereCreatedAt($value)
  * @method static Builder|Country whereId($value)
  * @method static Builder|Country whereTitle($value)
@@ -37,7 +35,6 @@ class Country extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'title',
-        'code'
     ];
 
     public function scopeOrdered(Builder $query): Builder

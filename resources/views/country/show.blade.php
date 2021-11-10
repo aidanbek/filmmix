@@ -7,23 +7,6 @@
     @include('components.title_row', ['title' =>  "Страна '$country->title'"])
     <div class="row">
         <div class="col-sm-12">
-            <form>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <label for="">Код страны</label>
-                            <input type="text"
-                                   class="form-control"
-                                   readonly
-                                   value="{{$country->code}}">
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Фильмы</h4>
