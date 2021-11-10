@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+
 
 /**
  * App\Models\Film
@@ -20,6 +22,8 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $countries_count
  * @property-read Collection|Genre[] $genres
  * @property-read int|null $genres_count
+ * @property-read Collection|FilmProfession[] $professionRelations
+ * @property-read int|null $profession_relations_count
  * @property-read Collection|Tagline[] $taglines
  * @property-read int|null $taglines_count
  * @method static Builder|Film newModelQuery()
@@ -60,5 +64,13 @@ class Film extends Model
     public function taglines(): BelongsToMany
     {
         return $this->belongsToMany(Tagline::class, FilmTagline::class)->ordered();
+    }
+
+    public function professionRelations(): HasMany
+    {
+        return $this->hasMany(FilmProfession::class)
+            ->select('film_professions.*')
+            ->join('professions', 'professions.id', '=', 'film_professions.profession_id')
+            ->orderBy('professions.title');
     }
 }

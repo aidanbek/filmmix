@@ -38,16 +38,12 @@ class FilmController extends Controller
 
         $genres = Genre::ordered()->get();
         $countries = Country::ordered()->get();
-        $currentGenres = $request->genres;
-        $currentCountries = $request->countries;
 
         return view('film.index', compact(
             'films',
             'request',
             'genres',
-            'countries',
-            'currentGenres',
-            'currentCountries'
+            'countries'
         ));
     }
 

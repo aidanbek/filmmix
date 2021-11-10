@@ -36,7 +36,10 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        @include('components.selects.genres', compact('genres'))
+                                        @include('components.selects.genres', [
+                                            'genres' => $genres,
+                                            'currentGenres' => $request->genres
+                                        ])
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +48,10 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        @include('components.selects.countries', compact('countries'))
+                                        @include('components.selects.countries', [
+                                            'countries' => $countries,
+                                            'currentCountries' => $request->countries
+                                        ])
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,11 @@
 # Release Notes
 
+## [0.10.1 (2021-11-10)](https://github.com/aidanbek/filmmix/compare/0.10.0...0.10.1)
+
+### Changed
+- Rename 'FilmCountry' to 'FilmOriginCountry'
+- Changed film page
+
 ## [0.10.0 (2021-10-24)](https://github.com/aidanbek/filmmix/compare/0.9.2...0.10.0)
 
 ### Changed
