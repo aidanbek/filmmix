@@ -1,5 +1,10 @@
 # Release Notes
 
+## [0.10.2 (2021-11-10)](https://github.com/aidanbek/filmmix/compare/0.10.1...0.10.2)
+
+### Added
+- Plural title for profession
+
 ## [0.10.1 (2021-11-10)](https://github.com/aidanbek/filmmix/compare/0.10.0...0.10.1)
 
 ### Changed

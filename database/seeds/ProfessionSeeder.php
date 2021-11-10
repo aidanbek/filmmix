@@ -14,17 +14,36 @@ class ProfessionSeeder extends Seeder
     public function run()
     {
         $professions = [
-            ['title' => 'Актер'],
-            ['title' => 'Композитор'],
-            ['title' => 'Оператор-постановщик'],
-            ['title' => 'Продюсер'],
-            ['title' => 'Режиссер'],
-            ['title' => 'Сценарист']
+            [
+                'title' => 'Актер',
+                'plural_title' => 'Актеры'
+            ],
+            [
+                'title' => 'Композитор',
+                'plural_title' => 'Композиторы'
+            ],
+            [
+                'title' => 'Оператор-постановщик',
+                'plural_title' => 'Операторы-постановщики'
+            ],
+            [
+                'title' => 'Продюсер',
+                'plural_title' => 'Продюсеры'
+            ],
+            [
+                'title' => 'Режиссер',
+                'plural_title' => 'Режиссеры'
+            ],
+            [
+                'title' => 'Сценарист',
+                'plural_title' => 'Сценаристы'
+            ]
         ];
 
         foreach ($professions as $profession) {
             Profession::create([
-                'title' => $profession['title']
+                'title' => $profession['title'],
+                'plural_title' => $profession['plural_title']
             ]);
         }
     }
