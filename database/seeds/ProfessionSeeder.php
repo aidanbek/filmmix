@@ -3,7 +3,6 @@
 use App\Models\Profession;
 use Illuminate\Database\Seeder;
 
-
 class ProfessionSeeder extends Seeder
 {
     /**
@@ -13,40 +12,10 @@ class ProfessionSeeder extends Seeder
      */
     public function run()
     {
-        $professions = [
-            [
-                'id' => 0,
-                'title' => 'Актер',
-                'plural_title' => 'Актеры'
-            ],
-            [
-                'id' => 1,
-                'title' => 'Композитор',
-                'plural_title' => 'Композиторы'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Оператор-постановщик',
-                'plural_title' => 'Операторы-постановщики'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Продюсер',
-                'plural_title' => 'Продюсеры'
-            ],
-            [
-                'id' => 4,
-                'title' => 'Режиссер',
-                'plural_title' => 'Режиссеры'
-            ],
-            [
-                'id' => 5,
-                'title' => 'Сценарист',
-                'plural_title' => 'Сценаристы'
-            ]
-        ];
+        $path = __DIR__ . "\\json\\professions.json";
+        $rawProfessions = json_decode(file_get_contents($path), true);
 
-        foreach ($professions as $profession) {
+        foreach ($rawProfessions as $profession) {
             Profession::create([
                 'id' => $profession['id'],
                 'title' => $profession['title'],

@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this
             ->call(ProfessionSeeder::class)
             ->call(GenreSeeder::class)
-            ->call(CountrySeeder::class);
+            ->call(CountrySeeder::class)
+            ->call(UserSeeder::class);
     }
 }

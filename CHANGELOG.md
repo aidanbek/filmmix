@@ -1,5 +1,13 @@
 # Release Notes
 
+## [0.10.4 (2021-11-13)](https://github.com/aidanbek/filmmix/compare/0.10.3...0.10.4)
+
+### Added
+- DB seeders for users
+
+### Refactored
+- Source data moved from DB seeder to json files 
+
 ## [0.10.3 (2021-11-11)](https://github.com/aidanbek/filmmix/compare/0.10.2...0.10.3)
 
 ### Added
